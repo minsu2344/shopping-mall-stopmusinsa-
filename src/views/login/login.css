@@ -1,3 +1,8 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .login-form-container {
   display: flex;
   align-items: center;
@@ -15,4 +20,50 @@
 
 .login-form-box .button {
   font-weight: bold;
+}
+
+/* 자동 로그인 & 아이디 비번 찾기 */
+.autologin-find-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.checkbox {
+  font-size: 50%;
+}
+
+.find-user {
+  display: flex;
+  align-items: center;
+}
+
+/* 계정 연동 로그인 */
+.connect-account-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.account-google {
+  background-color: rgb(148, 198, 255);
+  width: 70%;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-radius: 30px;
+}
+
+.account-kakako {
+  background-color: yellow;
+  width: 70%;
+  border-radius: 30px;
+  text-align: center;
+}
+
+/* 회원가입 */
+.register {
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
 }
