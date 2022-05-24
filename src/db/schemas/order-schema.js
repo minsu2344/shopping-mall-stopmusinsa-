@@ -1,19 +1,22 @@
 import {Schema} from 'mongoose';
-import {UserSchema} from './user-schema';
 
 const OrderSchema = new Schema(
     {
-      products: [UserSchema],
+      products: [{
+        type: Schema.Types.ObjectId,
+        ref: 'products',
+        required: true,
+        count: {
+          type: Number,
+          required: true,
+        },
+      }],
       user: {
         type: Schema.Types.ObjectId,
         ref: 'users',
         required: true,
       },
       total: {
-        type: Number,
-        required: true,
-      },
-      count: {
         type: Number,
         required: true,
       },
