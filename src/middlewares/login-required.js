@@ -39,4 +39,4 @@ function loginRequired(req, res, next) {
   }
 }
 
-export { loginRequired };
+export {loginRequired};
