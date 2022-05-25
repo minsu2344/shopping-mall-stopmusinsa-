@@ -67,6 +67,11 @@ body {
   padding: 0 4px;
 }
 
+#emailInput:focus,
+#passwordInput:focus {
+  background-color: #ecf3fd;
+}
+
 #submitButton {
   background-color: black;
   border-radius: 5px;
@@ -76,6 +81,13 @@ body {
   margin-top: 1.5rem;
   font-size: 1.2rem;
   font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#submitButton:hover {
+  background-color: rgb(41, 40, 40);
+  border-color: rgb(41, 40, 40);
 }
 
 /* 자동 로그인 & 아이디 비번 찾기 */
@@ -86,7 +98,7 @@ body {
 }
 
 .checkbox {
-  font-size: 50%;
+  font-size: 50%;   
 }
 
 .find-user {
