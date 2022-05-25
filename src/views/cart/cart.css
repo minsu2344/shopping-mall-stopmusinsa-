@@ -1,0 +1,31 @@
+/* 카트 상단 타이틀 */
+.cart-container {
+  position: absolute;
+  top: 200px;
+  left: 500px;
+  width: calc(100% - 510px);
+  border: 2px solid rgba(34, 34, 37, 0.11);
+}
+
+.cart-title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(34, 34, 37, 0.11);
+  height: 70px;
+}
+
+.cart-title {
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.cart-step {
+  margin-right: 20px;
+}
+
+.current {
+  font-weight: 800;
+}
+
+/* 카트 상품 목록 */
