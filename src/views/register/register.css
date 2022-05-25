@@ -21,11 +21,21 @@
   padding: 2px 6px;
   border: rgb(41, 40, 40) 2.5px solid;
   border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.login:hover {
+  background-color: rgb(41, 40, 40);
+  color: white;
 }
 
 .cart {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
+}
+
+.cart i {
+  vertical-align: middle;
 }
 
 /* 폼 작성 */
