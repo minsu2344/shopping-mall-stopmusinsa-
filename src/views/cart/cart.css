@@ -13,6 +13,7 @@ body {
   left: 300px;
   width: calc(100% - 310px);
   border: 2px solid rgba(34, 34, 37, 0.11);
+  margin-bottom: 100px;
 }
 
 .cart-title-box {
