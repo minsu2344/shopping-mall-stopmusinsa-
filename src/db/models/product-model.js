@@ -20,6 +20,15 @@ export class ProductModel {
     const products = await Product.find({});
     return products;
   }
+  // 상품 목록 with 페이지네이션
+  async findByPage(page, show) {
+    const products =
+      await Product.find({})
+          .sort({createdAt: -1})
+          .skip(show*(page-1))
+          .limit(show);
+    return products;
+  }
   // 카테고리 추가, 카테고리 수정, 상품 수정
   async update({productId, update}) {
     const filter = {_id: productId};
