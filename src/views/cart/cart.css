@@ -74,6 +74,10 @@ body {
   border-bottom: 2px solid rgba(34, 34, 37, 0.11);
 }
 
+.product:last-child {
+  border: unset;
+}
+
 .product-info {
   display: flex;
   justify-content: space-between;
