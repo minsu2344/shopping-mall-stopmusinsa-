@@ -20,9 +20,14 @@ const OrderSchema = new Schema(
         type: Number,
         required: true,
       },
+      state: {
+        type: String,
+        required: true,
+        default: '준비중',
+      },
     },
     {
-      collection: 'products',
+      collection: 'orders',
       timestamps: true,
     },
 );
