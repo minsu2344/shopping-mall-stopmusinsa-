@@ -80,6 +80,11 @@ body {
   width: 60%;
 }
 
+.product-option {
+  margin-top: 6px;
+  color: rgba(83, 83, 85, 0.486);
+}
+
 .product-quantity-box {
   display: flex;
   align-items: center;
@@ -111,7 +116,7 @@ input::-webkit-inner-spin-button {
   border: none;
   background-color: rgba(34, 34, 37, 0.11);
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 24px;
 }
 
