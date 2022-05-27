@@ -61,7 +61,6 @@ body {
   grid-template-rows: repeat(auto-fill, minmax(60px, auto));
   align-items: center;
   justify-items: center;
-  border-bottom: 2px solid rgba(34, 34, 37, 0.11);
   font-weight: 700;
 }
 
@@ -71,12 +70,12 @@ body {
   grid-template-rows: repeat(auto-fill, minmax(100px, auto));
   align-items: center;
   justify-items: center;
-  border-bottom: 2px solid rgba(34, 34, 37, 0.11);
+  border-top: 2px solid rgba(34, 34, 37, 0.11);
 }
 
-.product:last-child {
+/* .product:last-child {
   border: unset;
-}
+} */
 
 .product-info {
   display: flex;
@@ -95,7 +94,7 @@ body {
   align-items: center;
 }
 
-.product-quantity-box .produect-quantity {
+.product-quantity-box .product-quantity {
   height: 20px;
   line-height: 20px;
   padding: 0 10px;
