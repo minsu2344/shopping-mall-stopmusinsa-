@@ -10,7 +10,7 @@ export class OrderModel {
     return order;
   }
   // 주문 조회(비회원)
-  async findById(fullname, phoneNumber) {
+  async findByNamePhoneNumber(fullname, phoneNumber) {
     const filter = {fullname: fullname, phoneNumber: phoneNumber};
     const order = await Order.findOne(filter);
     return order;
