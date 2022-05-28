@@ -7,7 +7,7 @@ class ProductService {
   // 상품 등록
   async addProduct(productInfo) {
     // 구조분해 할당 후 스키마 구조에 따라 세팅 const {} = productInfo;
-    const product = await this.productModel.addProduct(productInfo);
+    const product = await this.productModel.create(productInfo);
     return product;
   }
 
@@ -25,10 +25,11 @@ class ProductService {
 
   // 특정 상품 조회
   async getProductById(productId) {
-    const product = await this.productModel.findById(page, show);
+    const product = await this.productModel.findById(productId);
     return product;
   }
 
+  // 상품 업데이트
   async setProduct(productId, toUpdate) {
     let product = await this.productModel.findById(productId);
 
@@ -37,14 +38,21 @@ class ProductService {
       throw new Error('등록된 상품이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
-    product = await this.productModel.update({
-      productId,
-      update: toUpdate,
-    });
+    product = await this.productModel.update(
+        product._id,
+        toUpdate,
+    );
     return product;
   }
+  // 상품 삭제
+  async deleteProduct(productId) {
+    if (productId) {
+      await this.productModel.delete({_id: productId});
+    } else {
+      await this.productModel.delete();
+    }
+  }
 }
-
 
 const productService = new ProductService(productModel);
 
