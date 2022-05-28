@@ -14,6 +14,7 @@ module.exports = {
     'require-jsdoc': 0,
     'linebreak-style': 0,
     'max-len': 0,
+    'new-cap': 0,
   },
   'plugins': ['@html-eslint'],
   'overrides': [
