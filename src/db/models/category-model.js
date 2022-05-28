@@ -1,6 +1,7 @@
 import {model} from 'mongoose';
 import {CategorySchema} from '../schemas/category-schema';
 import {productModel} from '..';
+
 const Category = model('categories', CategorySchema);
 
 export class CategoryModel {
@@ -46,15 +47,13 @@ export class CategoryModel {
 
   async findByName(categoryName, subCategoryName) {
     let category;
-    if (subCategory) {
-      category = await Size.findOne({item: categoryName, subitem: subCategoryName});
+    if (subCategoryName) {
+      category = await Category.findOne({item: categoryName, subItem: subCategoryName});
     } else {
-      category = await Size.findMany({item: categoryName});
+      category = await Category.find({item: categoryName});
     }
     return category;
   }
 }
-
 const categoryModel = new CategoryModel();
-
 export {categoryModel};

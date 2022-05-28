@@ -18,9 +18,10 @@ export class ProductModel {
   // 상품 목록
   async findAll() {
     const products = await Product.find({})
-        .populate('colors')
-        .populate('sizes')
+        .populate('colors.color')
+        .populate('sizes.size')
         .populate('categories');
+
     return products;
   }
   // 상품 목록 with 페이지네이션
@@ -36,12 +37,20 @@ export class ProductModel {
     return products;
   }
   // 카테고리 추가, 카테고리 수정, 상품 수정
-  async update({productId, update}) {
+  async update(productId, update) {
     const filter = {_id: productId};
     const option = {returnOriginal: false};
 
     const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
     return updatedProduct;
+  }
+
+  async delete(productId) {
+    if (!productId) {
+      await Product.deleteMany();
+    } else {
+      await Product.deleteOne({_id: productId});
+    }
   }
 }
 

@@ -36,7 +36,7 @@ export class ColorModel {
   }
 
   async findByName(colorName) {
-    const color = await Color.findOne({_id: colorName});
+    const color = await Color.findOne({colorName});
     return color;
   }
 }

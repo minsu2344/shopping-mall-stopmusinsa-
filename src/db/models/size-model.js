@@ -22,16 +22,18 @@ export class SizeModel {
     const size = await Size.findOne({_id: sizeId});
     return size;
   }
+
   async findAll() {
     const size = await Size.find();
     return size;
   }
+
   async findByName(sizeName) {
-    const size = await Size.findOne({_id: sizeName});
+    const size = await Size.findOne({sizeName});
     return size;
   }
 
-  async delete(sizeName) {
+  async delete(sizeId) {
     if (!sizeId) {
       await Size.deleteMany();
     }
