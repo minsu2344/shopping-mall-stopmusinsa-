@@ -8,7 +8,7 @@ const ColorSchema = new Schema(
       },
     },
     {
-      collection: 'products',
+      collection: 'colors',
       timestamps: true,
     },
 );

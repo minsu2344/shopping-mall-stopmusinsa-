@@ -8,11 +8,11 @@ const CategorySchema = new Schema(
       },
       subItem: {
         type: String,
-        ref: 'subCategories',
+        required: true,
       },
     },
     {
-      collection: 'products',
+      collection: 'categories',
       timestamps: true,
     },
 );

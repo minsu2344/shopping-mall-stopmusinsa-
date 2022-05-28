@@ -22,7 +22,7 @@ const OrderSchema = new Schema(
       },
     },
     {
-      collection: 'products',
+      collection: 'orders',
       timestamps: true,
     },
 );

@@ -8,7 +8,7 @@ const SizeSchema = new Schema(
       },
     },
     {
-      collection: 'products',
+      collection: 'sizes',
       timestamps: true,
     },
 );

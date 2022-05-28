@@ -28,7 +28,7 @@ const ProductSchema = new Schema(
       },
       colors: [
         {
-          ColorSchema: {
+          color: {
             type: Schema.Types.ObjectId,
             ref: 'colors',
           },
@@ -36,7 +36,7 @@ const ProductSchema = new Schema(
       ],
       sizes: [
         {
-          SizeSchema: {
+          size: {
             type: Schema.Types.ObjectId,
             ref: 'sizes',
           },
