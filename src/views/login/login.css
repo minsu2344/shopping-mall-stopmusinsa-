@@ -30,7 +30,7 @@ body {
 }
 
 .cart {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -134,7 +134,8 @@ body {
 }
 
 .account-google {
-  border: 3px solid #659bf5;
+  border: 3px solid #79a7f7;
+  background-color: #79a7f7;
   width: 70%;
   height: 2.5rem;
   line-height: 2.5rem;
@@ -146,13 +147,14 @@ body {
 }
 
 .account-google span {
-  color: #659bf5;
+  color: white;
   font-size: 16px;
   font-weight: bold;
 }
 
 .account-kakao {
-  border: 3px solid #d0c710;
+  border: 3px solid #fee500;
+  background-color: #fee500;
   width: 70%;
   height: 2.5rem;
   line-height: 2.5rem;
@@ -163,13 +165,13 @@ body {
 }
 
 .account-kakao span {
-  color: #d0c710;
+  color: #381e1f;
   font-size: 16px;
   font-weight: bold;
 }
 
 .connect-account-box img {
-  width: 1.3rem;
+  width: 20px;
   margin-right: 8px;
 }
 
