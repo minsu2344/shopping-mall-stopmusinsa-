@@ -26,7 +26,7 @@ orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber',
 // 전체 주문 목록 조회
 orderRouter.get('/orderalllist', loginRequired, async (req, res, next) => {
   try {
-    const orders = await orderService.findAll();
+    const orders = await orderService.getAllOrderList();
     res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -34,7 +34,7 @@ orderRouter.get('/orderalllist', loginRequired, async (req, res, next) => {
 });
 
 // 주문 추가
-orderRouter.post('/orderadd', async (req, res, next) => {
+orderRouter.post('/addorder', async (req, res, next) => {
   try {
     const {
       products,

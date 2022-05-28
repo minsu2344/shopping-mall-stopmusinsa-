@@ -21,10 +21,11 @@ class OrderService {
   }
 
   // 전체 주문 내역 확인(운영자)
-  async getOrders() {
+  async getAllOrderList() {
     const orders = await this.orderModel.findAll();
     return orders;
   }
+
   // 주문 추가
   async addOrder(orderInfo) {
     const createNewOrder = await this.orderModel.create(orderInfo);

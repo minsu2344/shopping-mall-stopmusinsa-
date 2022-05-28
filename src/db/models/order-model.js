@@ -9,22 +9,26 @@ export class OrderModel {
     const order = await Order.findOne({userId: userId});
     return order;
   }
+
   // 주문 조회(비회원)
   async findByNamePhoneNumber(fullname, phoneNumber) {
     const filter = {fullname: fullname, phoneNumber: phoneNumber};
     const order = await Order.findOne(filter);
     return order;
   }
+
   // 주문 조회(관리자)
   async findAll() {
     const orders = await Order.find({});
     return orders;
   }
+
   // 주문 추가
   async create(orderInfo) {
     const createdNewOrder = await Order.create(orderInfo);
     return createdNewOrder;
   }
+
   // 주문 상태 변경(취소, 완료)
   async update(orderId, update) {
     const filter = {_id: orderId};
