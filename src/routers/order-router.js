@@ -11,12 +11,12 @@ orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber',
     async (req, res, next) => {
       try {
         const {userId, fullname, phoneNumber} = req.params;
-        const userInfo = {
+        const orderInfo = {
           userId: userId,
           fullname: fullname,
           phoneNumber: phoneNumber,
         };
-        const order = await orderService.getOrderList(userInfo);
+        const order = await orderService.getOrderList(orderInfo);
         res.status(200).json(order);
       } catch (err) {
         next(err);
@@ -67,13 +67,13 @@ orderRouter.patch('/orders/:userId/:fullname/:phoneNumber/:state',
     async (req, res, next) => {
       try {
         const {userId, fullname, phoneNumber, state} = req.params;
-        const userInfo = {
+        const orderInfo = {
           userId: userId,
           fullname: fullname,
           phoneNumber: phoneNumber,
           state: state,
         };
-        const orderList = await orderService.setOrder(userInfo);
+        const orderList = await orderService.setOrder(orderInfo);
         res.status(200).json(orderList);
       } catch (err) {
         next(err);

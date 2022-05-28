@@ -6,7 +6,7 @@ class OrderService {
   }
 
   // 고객 주문 내역 조회
-  async getOrderList(userInfo) {
+  async getOrderList(orderInfo) {
     const {userId, fullname, phoneNumber} = orderInfo;
     const orderList = userId === 'Non-member' ?
         await this.orderModel.findByNamePhoneNumber(fullname, phoneNumber) :
