@@ -134,4 +134,4 @@ userRouter.patch(
     },
 );
 
-export {userRouter};
+export default userRouter;

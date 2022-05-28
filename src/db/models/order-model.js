@@ -6,20 +6,20 @@ const Order = model('orders', OrderSchema);
 export class OrderModel {
   // 주문 조회(회원)
   async findById(userId) {
-    const order = await Order.findOne({userId: userId});
+    const order = await Order.findOne({userId: userId}).populate('products');
     return order;
   }
 
   // 주문 조회(비회원)
   async findByNamePhoneNumber(fullname, phoneNumber) {
     const filter = {fullname: fullname, phoneNumber: phoneNumber};
-    const order = await Order.findOne(filter);
+    const order = await Order.findOne(filter).populate('products');
     return order;
   }
 
   // 주문 조회(관리자)
   async findAll() {
-    const orders = await Order.find({});
+    const orders = await Order.find({}).populate('products');
     return orders;
   }
 
