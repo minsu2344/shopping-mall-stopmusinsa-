@@ -1,13 +1,13 @@
 import {Router} from 'express';
-import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import {loginRequired} from '../middlewares';
 import {orderService} from '../services';
+import {param, validationResult} from 'express-validator';
 
 const orderRouter = Router();
 
-// 조문 조회
-orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber',
+// 주문 조회
+orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber', param('phoneNumber').isMobilePhone(['ko-KR']),
     async (req, res, next) => {
       try {
         const {userId, fullname, phoneNumber} = req.params;
@@ -16,6 +16,13 @@ orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber',
           fullname: fullname,
           phoneNumber: phoneNumber,
         };
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          throw new Error('핸드폰 형식이 아닌 요청입니다. 다시 한 번 확인부탁드립니다.');
+          return;
+        }
+
         const order = await orderService.getOrderList(orderInfo);
         res.status(200).json(order);
       } catch (err) {
