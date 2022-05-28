@@ -6,7 +6,7 @@ import {orderService} from '../services';
 
 const orderRouter = Router();
 
-// 조문 조회
+// 주문 조회
 orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber',
     async (req, res, next) => {
       try {
