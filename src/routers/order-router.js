@@ -6,15 +6,32 @@ import {param, validationResult} from 'express-validator';
 
 const orderRouter = Router();
 
-// 주문 조회
-orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber', param('phoneNumber').isMobilePhone(['ko-KR']),
+// 회원 주문 조회
+orderRouter.get('/:userId', async (req, res, next) => {
+  try {
+    console.log('a');
+    const {userId} = req.params;
+    const orderInfo = {
+      userId: userId,
+    };
+
+    const order = await orderService.getOrder(orderInfo);
+    res.status(200).json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// 비회원 조문 조회
+orderRouter.get('/:fullName/:phone', param('phone').isMobilePhone(['ko-KR']),
     async (req, res, next) => {
       try {
-        const {userId, fullname, phoneNumber} = req.params;
+        console.log('b');
+        const {fullname, phone} = req.params;
         const orderInfo = {
           userId: userId,
           fullname: fullname,
-          phoneNumber: phoneNumber,
+          phoneNumber: phone,
         };
 
         const errors = validationResult(req);
@@ -23,7 +40,7 @@ orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber', param('phoneNumber'
           return;
         }
 
-        const order = await orderService.getOrderList(orderInfo);
+        const order = await orderService.getOrder(orderInfo);
         res.status(200).json(order);
       } catch (err) {
         next(err);
@@ -31,9 +48,9 @@ orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber', param('phoneNumber'
     });
 
 // 전체 주문 목록 조회
-orderRouter.get('/orderalllist', loginRequired, async (req, res, next) => {
+orderRouter.get('/orders', loginRequired, async (req, res, next) => {
   try {
-    const orders = await orderService.getAllOrderList();
+    const orders = await orderService.getOrders();
     res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -41,7 +58,7 @@ orderRouter.get('/orderalllist', loginRequired, async (req, res, next) => {
 });
 
 // 주문 추가
-orderRouter.post('/addorder', async (req, res, next) => {
+orderRouter.post('/', async (req, res, next) => {
   try {
     const {
       products,

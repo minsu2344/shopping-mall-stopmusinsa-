@@ -6,9 +6,11 @@ class OrderService {
   }
 
   // 고객 주문 내역 조회
-  async getOrderList(orderInfo) {
-    const {userId, fullname, phoneNumber} = orderInfo;
-    const orderList = userId === 'Non-member' ?
+  async getOrder(orderInfo) {
+    const userId = orderInfo.orderId || nonMemberId;
+    const fullname = orderInfo.fullname || '';
+    const phoneNumber = orderInfo.phoneNumber || '';
+    const orderList = userId === nonMemberId ?
         await this.orderModel.findByNamePhoneNumber(fullname, phoneNumber) :
         await this.orderModel.findById(userId);
 
@@ -21,7 +23,7 @@ class OrderService {
   }
 
   // 전체 주문 내역 확인(운영자)
-  async getAllOrderList() {
+  async getOrders() {
     const orders = await this.orderModel.findAll();
     return orders;
   }
@@ -59,5 +61,6 @@ class OrderService {
 }
 
 const orderService = new OrderService(orderModel);
+const nonMemberId ='Non-member';
 
 export {orderService};
