@@ -2,7 +2,7 @@ import {Router} from 'express';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import {loginRequired, adminRequired} from '../middlewares';
 import {orderService} from '../services';
-import {param, validationResult} from 'express-validator';
+import {query, validationResult} from 'express-validator';
 
 const orderRouter = Router();
 
@@ -22,12 +22,11 @@ orderRouter.get('/member/orders', loginRequired, async (req, res, next) => {
 });
 
 // 비회원 조문 조회
-orderRouter.get('/non_member/orders', param('phone').isMobilePhone(['ko-KR']),
+orderRouter.get('/non_member/orders', query('phone').isMobilePhone(['ko-KR']),
     async (req, res, next) => {
       try {
         const {fullname, phone} = req.query;
         const orderInfo = {
-          userId: userId,
           fullname: fullname,
           phoneNumber: phone,
         };
@@ -85,14 +84,12 @@ orderRouter.post('/', async (req, res, next) => {
 });
 
 // 주문 상태 변경
-orderRouter.patch('/orders/:userId/:fullname/:phoneNumber/:state',
+orderRouter.patch('/orders/:orderId/:state',
     async (req, res, next) => {
       try {
-        const {userId, fullname, phoneNumber, state} = req.params;
+        const {orderId, state} = req.params;
         const orderInfo = {
-          userId: userId,
-          fullname: fullname,
-          phoneNumber: phoneNumber,
+          orderId: orderId,
           state: state,
         };
         const orderList = await orderService.setOrder(orderInfo);

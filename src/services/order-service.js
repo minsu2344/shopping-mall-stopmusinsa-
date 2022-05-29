@@ -36,26 +36,15 @@ class OrderService {
 
   // 주문 상태 변경(취소, 완료)
   async setOrder(orderInfo) {
-    const {orderId, userId, fullname, phoneNumber} = orderInfo;
-    const orderList = userId === 'Non-member' ?
-        await this.orderModel.findByNamePhoneNumber(fullname, phoneNumber) :
-        await this.orderModel.findByUserId(userId);
-
-    // 주문 내역 존재 확인
-    if (!orderList) {
-      throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
-      return;
-    }
-
     // 일치하는 주문 여부 확인
-    const metchOrder = orderList.find((data) => orderId === data._id);
-    if (metchOrder.length < 1) {
-      throw new Error('해당 주문이 존재하지 않습니다. 다시 하 번 확인해 주세요.');
+    const metchOrder = await this.orderModel.findById(orderInfo.orderId);
+    if (!metchOrder) {
+      throw new Error('해당 주문이 존재하지 않습니다. 다시 한 번 확인해 주세요.');
       return;
     }
 
     const updateOrder =
-        await this.orderModel.update(orderId, {state: orderInfo.state});
+        await this.orderModel.update(orderInfo.orderId, {state: orderInfo.state});
     return updateOrder;
   }
 }
