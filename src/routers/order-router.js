@@ -1,16 +1,15 @@
 import {Router} from 'express';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import {loginRequired} from '../middlewares';
+import {loginRequired, adminRequired} from '../middlewares';
 import {orderService} from '../services';
 import {param, validationResult} from 'express-validator';
 
 const orderRouter = Router();
 
 // 회원 주문 조회
-orderRouter.get('/:userId', async (req, res, next) => {
+orderRouter.get('/member/orders', loginRequired, async (req, res, next) => {
   try {
-    console.log('a');
-    const {userId} = req.params;
+    const {userId} = req.currentUserId;
     const orderInfo = {
       userId: userId,
     };
@@ -23,11 +22,10 @@ orderRouter.get('/:userId', async (req, res, next) => {
 });
 
 // 비회원 조문 조회
-orderRouter.get('/:fullName/:phone', param('phone').isMobilePhone(['ko-KR']),
+orderRouter.get('/non_member/orders', param('phone').isMobilePhone(['ko-KR']),
     async (req, res, next) => {
       try {
-        console.log('b');
-        const {fullname, phone} = req.params;
+        const {fullname, phone} = req.query;
         const orderInfo = {
           userId: userId,
           fullname: fullname,
@@ -48,7 +46,7 @@ orderRouter.get('/:fullName/:phone', param('phone').isMobilePhone(['ko-KR']),
     });
 
 // 전체 주문 목록 조회
-orderRouter.get('/orders', loginRequired, async (req, res, next) => {
+orderRouter.get('/orders', loginRequired, adminRequired, async (req, res, next) => {
   try {
     const orders = await orderService.getOrders();
     res.status(200).json(orders);
