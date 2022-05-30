@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Order</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../tabIcon.png"
+    />
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="../nomalize.css">
+    <link rel="stylesheet" href="pay.css" />
+  </head>
+
+  <body>
+    <div class="pay__container">
+      <!-- 결제 타이틀 -->
+      <div class="pay__title__box">
+        <div class="pay__title">
+          <h3>Order / Payment</h3>
+        </div>
+        <div class="pay__step">
+          <span>장바구니 > </span>
+          <span class="current">결제</span>
+        </div>
+      </div>
+
+      <!-- 수령인 정보 -->
+      <form class="recipient__info">
+        <h4>수령인 정보</h4>
+        <div class="info__box">
+          <div class="name">
+            <label for="">수령인</label>
+            <input type="text" id="name" placeholder="유재석">
+          </div>
+          <div class="phone">
+            <label for="">휴대폰 번호</label>
+            <input type="number" placeholder="'-'없이 번호만 작성">
+          </div>
+          <div class="address">
+            <label for="">주소</label>
+            <input type="text" placeholder="상세주소까지 입력">
+            <button>주소찾기</button>
+          </div>
+          <div class="message">
+            <label for="">배송 메시지</label>
+            <select name="message" id="message__selector" class="message__selector">
+              <option value="door">문 앞에 놔주세요:)</option>
+              <option value="door">집 안에 놔주세요:)</option>
+              <option value="door">배송 전 연락 바랍니다:)</option>
+              <option value="door">부재시 계속 기다리세요:)</option>
+              <option value="door">사라지면 책임 묻겠습니다:)</option>
+              <option value="door">직접입력</option>
+            </select>
+            <input type="text" name="" id="message__self" class="message__self hidden" disabled>
+          </div>
+          <div class="payment__method">
+            <span>결제수단 선택</span>
+            <input type="radio" name="payment" value="card">카드
+            <input type="radio" name="payment" value="cash">무통장입금
+          </div>
+          <div class="paymentBtn">
+            <a href="../home/home.html"><input type="submit" id="submintBtn" value="총 000원 결제"></a>
+          </div>
+        </div>
+      </form>
+
+      <!-- 상품 정보 -->
+      <div class="products__info__container">
+        <h4>상품 정보</h4>
+        <div class="products__info__box">
+          <div class="products__info__title">
+            <p>상품 정보</p>
+            <p>수량</p>
+            <p>금액</p>
+          </div>
+          <div class="products__main">
+            <div class="products__basic">
+              <img src="../tabIcon.png" alt="">
+              <div class="name__size">
+                <p class="products__name">상품이름</p>
+                <p class="size">사이즈</p>
+              </div>
+            </div>
+            <div class="products__quantity">
+              <p class="quantity">1</p>
+            </div>
+            <div class="products__price">
+              <p class="price"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 주의사항 -->
+      <div class="warnning">
+        <h4>주의사항</h4>
+        <p> - 상품이 파손돼서 배송시 환불 불가합니다.</p>
+        <p> - 단순 변심으로 교환 및 환불 시 5만원의 배송비가 발생합니다.</p>
+        <p> - 카드 결제시 수수료 15퍼센트가 발생합니다.</p>
+        <p> - 환불은 확인 후 영업일 기준 10년 뒤 순차적으로 처리됩니다.</p>
+      </div>
+    </div>
+    <script src="pay.js"></script>
+  </body>
+</html>
