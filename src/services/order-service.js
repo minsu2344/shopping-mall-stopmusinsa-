@@ -7,12 +7,12 @@ class OrderService {
 
   // 고객 주문 내역 조회
   async getOrder(orderInfo) {
-    const userId = orderInfo.orderId || nonMemberId;
+    const userId = orderInfo.userId || nonMemberId;
     const fullname = orderInfo.fullname || '';
     const phoneNumber = orderInfo.phoneNumber || '';
     const orderList = userId === nonMemberId ?
         await this.orderModel.findByNamePhoneNumber(fullname, phoneNumber) :
-        await this.orderModel.findById(userId);
+        await this.orderModel.findByUserId(userId);
 
     if (!orderList) {
       throw new Error('주문 내역이 없습니다. 다시 한 번 확인해 주세요.');
