@@ -185,3 +185,53 @@
 .ProductDetailPayment__cartButton:hover {
     background-color: rgb(245, 245, 245);
 }
+
+
+/* ProductDetail > Info */
+.ProductDetail__Info {
+    margin-top: 32px;
+}
+
+.ProductDetailInfo__border {
+    height: 1px;
+    width: 100%;
+    background-color: rgb(225, 225, 225);
+    margin-top: 48px;
+}
+
+.ProductDetail__info {}
+
+.ProductDetailInfo__header {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ProductDetailInfoHeader__title {
+    margin-left: 16px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.ProductDetailInfoHeader__titleCaption {
+    font-size: 12px;
+    color: rgb(187, 187, 187);
+    font-weight: 400;
+    margin-left: 4px;
+}
+
+.ProductDetailInfoHeader__report {
+    font-size: 12px;
+    color: rgb(187, 187, 187);
+    margin-right: 16px;
+}
+
+.ProductDetailInfo__body {
+    margin-top: 48px
+}
+
+.ProductDetailInfo__image {
+    width: 100%;
+}
