@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
     cb(null, __dirname+'/../views/uploads');
   },
   filename: function(req, file, cb) {
-    const imageName = new Date().valueOf() + '_' + req.body.name;
+    const imageName = new Date().valueOf() + '_' + req.body.name + file.originalname;
     req.body.image = `http://localhost:${process.env.SERVER_PORT || 5000}/uploads/${imageName}`;
     cb(null, imageName);
   },
