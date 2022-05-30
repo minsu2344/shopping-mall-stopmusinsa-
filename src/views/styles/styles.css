@@ -97,7 +97,7 @@ div {
     background-color: black;
 }
 
-.SiteHeader a {
+.SiteHeader__main a {
     position: relative;
     bottom: 2px;
 }
@@ -232,7 +232,7 @@ div {
     color: #e6e6e6;
 }
 
-.SiteHeader__mobile,
+.SiteHeaderMobileMain,
 .Banner {
     display: none;
 }
@@ -285,7 +285,7 @@ div {
 }
 
 .ProductCard__image {
-    width: 72%;
+    width: 80%;
 }
 
 
@@ -410,6 +410,7 @@ div {
 
 @media (max-width: 768px) {
 
+
     .SiteHeaderMain__container {
         width: 100%;
     }
@@ -457,13 +458,8 @@ div {
         display: block;
     }
 
-    .SiteHeader__mobile {
-        width: 100px;
-    }
 
-
-
-    .SiteHeader__mobile {
+    .SiteHeaderMobile__main {
         display: block;
         width: 100%;
     }
@@ -472,7 +468,11 @@ div {
         padding: 16px;
     }
 
-    .SiteHeaderMobile__container {
+    .SiteHeaderMobileMain {
+        display: block;
+    }
+
+    .SiteHeaderMobileMain__container {
         box-sizing: border-box;
         display: flex;
         justify-content: space-between;
@@ -482,11 +482,11 @@ div {
         width: 100%;
     }
 
-    .SiteHeaderMobile__logo {
+    .SiteHeaderMobileMain__logo {
         font-weight: 400;
     }
 
-    .SiteHeaderMobile__logoLink {
+    .SiteHeaderMobileMain__logoLink {
         font-size: 22px;
         line-height: 22px;
     }
@@ -494,7 +494,6 @@ div {
     .SiteHeaderMainNavItem:first-child {
         margin-left: 8px;
     }
-
 
     .Banner__image {
         display: block;
