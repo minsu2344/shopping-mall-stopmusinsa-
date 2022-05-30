@@ -3,8 +3,8 @@ const totalInProducts = document.querySelector('#product-num-all');
 const checkAllBox = document.querySelector('#product-check-all');
 const deleteAllBtn = document.querySelector('#deleteAllBtn');
 const deleteBtn = document.querySelector('#deleteBtn');
-const totalPrice = document.querySelector('#orderBtn');
 const productBox = document.querySelector('#product-box');
+const totalPrice = document.querySelector('#orderBtn');
 
 
 
@@ -45,7 +45,26 @@ function getProducts() {
     );
   }
 
-  totalPrice.value = `총 ${sum}원 주문하기`;
+  totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
+  if(sum === 0) {
+    totalPrice.disabled = 'disabled';
+    totalPrice.classList.add('disabled');
+    totalPrice.style = `
+      background-color: rgb(57, 56, 56);
+      color: white;
+      width: 290px;
+      height: 60px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      cursor: auto;`
+  }
+  else {
+    totalPrice.removeAttribute('disabled');
+    totalPrice.classList.remove('disabled');
+    totalPrice.removeAttribute('style');
+  }
 }
 
 
@@ -111,6 +130,19 @@ function handleCheckAllClick(e) {
 
 // 개별 체크박스 클릭 함수
 function handleCheckClick(e) {
+  let isChecked = true;
+  Array.from(checkBoxes).forEach(box => {
+    if(box.checked === false) {
+      isChecked = false;
+      return;
+    }
+  })
+
+  if(isChecked) {
+    deleteAllBtn.checked = true;
+  }
+
+
   const value = e.target.checked;
 
   const result = e.target.parentElement.children[5].innerText;
@@ -126,9 +158,25 @@ function handleCheckClick(e) {
     sum += Number(resultPrice);
   }
   
-  totalPrice.value = `총 ${sum}원 주문하기`;
+  totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
 }
 
+
+// 선택삭제 클릭 함수
+function hadleDeleteBtnClick() {
+  const result = confirm('선택한 상품을 제거하시겠습니까?');
+
+  if(result) {
+    Array.from(checkBoxes).forEach(checkBox => {
+      if(checkBox.checked === true) {
+        const index = Number(checkBox.previousElementSibling.innerText);
+        products.splice(index-1, 1);
+        saveProducts(products);
+        getProducts();
+      }
+    })
+  }
+}
 
 
 
@@ -201,3 +249,7 @@ checkAllBox.addEventListener('click', handleCheckAllClick);
 
 // 체크박스 개별 이벤트
 Array.from(checkBoxes).forEach(x => x.addEventListener('click', handleCheckClick));
+
+
+// 선택삭제 이벤트
+deleteBtn.addEventListener('click', hadleDeleteBtnClick);

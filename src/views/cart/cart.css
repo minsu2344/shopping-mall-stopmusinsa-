@@ -175,7 +175,7 @@ input::-webkit-inner-spin-button {
   all: unset;
   background-color: black;
   color: white;
-  width: 250px;
+  width: 290px;
   height: 60px;
   border-radius: 5px;
   text-align: center;
@@ -186,5 +186,5 @@ input::-webkit-inner-spin-button {
 }
 
 #orderBtn:hover {
-  background-color: rgb(57, 56, 56)
+  background-color: rgb(57, 56, 56);
 }
