@@ -2,6 +2,11 @@
 html,
 body {
   font-family: 'Noto Sans KR', sans-serif;
+
+}
+
+div {
+  box-sizing: border-box;
 }
 
 .Site__container {
@@ -74,7 +79,6 @@ body {
   margin-right: 32px;
   font-weight: 400;
   width: 200px;
-
 }
 
 .SiteHeaderMain__logoLink {
@@ -104,7 +108,6 @@ body {
 
 .SiteHeaderMainNav a {
   text-decoration: none;
-  color: white;
 }
 
 .SiteHeaderMainNav__list {
@@ -116,6 +119,10 @@ body {
   margin: 16px 16px;
   font-weight: 700;
   font-size: 18px;
+}
+
+.SiteHeaderMainNavItem a {
+  color: white;
 }
 
 /* SiteHeaderSub */
@@ -183,6 +190,13 @@ body {
   color: #e6e6e6;
 }
 
+.SiteHeader__mobile,
+.Banner {
+  display: none;
+}
+
+
+
 /* ProductList */
 .ProductList__container {
   padding: 24px 0;
@@ -204,7 +218,6 @@ body {
 .ProductCard {
   font-size: 12px;
   padding: 8px;
-  margin: 16px;
 }
 
 .ProductCard:hover {
@@ -227,7 +240,6 @@ body {
 .ProductCard__imageContainer {
   display: flex;
   justify-content: center;
-
 }
 
 .ProductCard__image {
@@ -258,7 +270,7 @@ body {
 
 .SiteFooterContact__container {
   display: flex;
-  padding: 24px 24px 32px 24px;
+  padding: 24px 0 32px 0;
 }
 
 .SiteFooterContactItem {
@@ -326,7 +338,7 @@ body {
 }
 
 .SiteFooterGuarantee__image {
-  width: 56px;
+  width: 72px;
   height: auto;
   margin-right: 16px;
 }
@@ -348,13 +360,191 @@ body {
   color: white;
 }
 
-
+.SiteFooter__mobile {
+  display: none;
+}
 
 @media (max-width: 576px) {}
 
 @media (max-width: 768px) {
-  .SiteHeaderMain__search {
+
+
+  .SiteHeader {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .SiteHeader__main {
+    order: 2;
+    background-color: white;
+    height: 40px;
+  }
+
+  .SiteHeader__main a {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .SiteHeader__main ul {
+    padding: 0;
+  }
+
+  .SiteHeaderMain__left {
     display: none;
+  }
+
+  .SiteHeaderMainNavItem .SiteHeaderMainNavItem__link {
+    color: rgb(166, 166, 166);
+  }
+
+  .SiteHeaderMainNavItem .SiteHeaderMainNavItem__link--active {
+    color: black;
+  }
+
+
+
+  .SiteHeader__sub,
+  .SiteHeader__member {
+    display: none;
+  }
+
+  .Banner {
+    display: block;
+  }
+
+  .SiteHeader__mobile {
+    width: 100px;
+  }
+
+
+
+  .SiteHeader__mobile {
+    display: block;
+    width: 100%;
+  }
+
+  .Site__container {
+    padding: 16px;
+  }
+
+  .SiteHeaderMobile__container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .SiteHeaderMobile__logo {
+    font-weight: 400;
+  }
+
+  .SiteHeaderMobile__logoLink {
+    font-size: 22px;
+    line-height: 22px;
+  }
+
+  .SiteHeaderMainNavItem:first-child {
+    margin-left: 8px;
+  }
+
+
+  .Banner__image {
+    display: block;
+    width: 100%;
+  }
+
+  .ProductList__container {
+    padding: 32px 0;
+  }
+
+  .productList__title {
+    margin-bottom: 32px;
+  }
+
+  .ProductList__mobileTitle {
+    color: rgb(179, 179, 179);
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  .ProductList__username {
+    color: black;
+  }
+
+  .ProductList__products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
+    grid-gap: 24px;
+  }
+
+  .ProductCard__image {
+    width: 100%;
+  }
+
+  .ProductCard {
+    padding: 0;
+  }
+
+  .ProductCard:hover {
+    background-color: white;
+    transform: scale(1.02);
+    transition: all .5s;
+
+  }
+
+  .SiteFooter {
+    background-color: black;
+    color: white;
+    padding-top: 32px;
+  }
+
+  .SiteFooter__contact {
+    border: none;
+
+  }
+
+  .SiteFooterContact__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .SiteFooterContactItem:not(:first-child) {
+    border: none;
+    padding: 0;
+  }
+
+  .SiteFooterContactItem:not(:last-child) {
+    display: none;
+  }
+
+  .SiteFooterContactItem {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .SiteFooterContactItem__links a {
+    color: white;
+  }
+
+  .SiteFooterContactItem>a {
+    color: white;
+  }
+
+  .SiteFooter__guarantee,
+  .SiteFooter__bottom {
+    display: none;
+  }
+
+  .SiteFooter__mobile {
+    display: block;
+    color: #6d6d6d;
+    font-size: 12px;
+    margin-top: 16px;
+    padding-bottom: 32px;
   }
 }
 
