@@ -368,6 +368,9 @@ div {
 
 @media (max-width: 768px) {
 
+  .SiteHeaderMain__container {
+    width: 100%;
+  }
 
   .SiteHeader {
     display: flex;
