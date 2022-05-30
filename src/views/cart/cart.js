@@ -28,22 +28,17 @@ function getProducts() {
 
   sum = 0;
 
-  const items = JSON.parse(localStorage.getItem(PRODUCTS_KEY));
-  for(let i=0; i<JSON.parse(localStorage.products).length; i++) {
-    const index = i+1;
-    const {url, name, size, price, quantity} = items[i];
-    const result = price*quantity;
-    sum += result;
-    productBox.innerHTML += paintProductBox(
-      index,
-      url,
-      name,
-      size,
-      price,
-      quantity,
-      result
-    );
-  }
+  JSON.parse(localStorage.products).forEach((items, i) => {
+    const element = JSON.parse(localStorage.getItem(PRODUCTS_KEY)).map((value, i) => {
+      const index = i+1;
+      const {url, name, size, price, quantity} = value;
+      const result = price*quantity;
+      sum += result;
+
+      return paintProductBox(index, url, name, size, price, quantity, result)
+    })
+    productBox.innerHTML = element.join('\n')
+  })
 
   totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
   if(sum === 0) {
@@ -73,9 +68,9 @@ function paintProductBox(index, url, name, size, price, quantity, result) {
   return `
   <div class="product">
       <p id="product-num">${index}</p>
-      <input type="checkbox" name="" class="product-check" checked>
+      <input type="checkbox" name="" class="product-check" checked onclick="handleCheck(this)">
       <div class="product-info">
-        <img src="${url}" alt="" style="width: 50px;">
+        <img src="${url}" alt="picture" style="width: 50px;">
         <div class="option">
           <p class="product-name">${name}</p>
           <p class="product-option">SIZE: ${size}</p>
@@ -124,41 +119,8 @@ function handleDeleteAllBtnClick() {
 
 // 전체 체크박스 클릭 함수
 function handleCheckAllClick(e) {
+  const checkBoxes = document.querySelectorAll('.product-check');
   Array.from(checkBoxes).forEach(x => x.checked = e.target.checked);
-}
-
-
-// 개별 체크박스 클릭 함수
-function handleCheckClick(e) {
-  let isChecked = true;
-  Array.from(checkBoxes).forEach(box => {
-    if(box.checked === false) {
-      isChecked = false;
-      return;
-    }
-  })
-
-  if(isChecked) {
-    deleteAllBtn.checked = true;
-  }
-
-
-  const value = e.target.checked;
-
-  const result = e.target.parentElement.children[5].innerText;
-  const resultPrice = result.replace(/,/g, '');
-
-  if(value === false) {
-    // 하나라도 false면 전체 체크박스도 false
-    checkAllBox.checked = false;
-
-    sum -= Number(resultPrice);
-  }
-  else {
-    sum += Number(resultPrice);
-  }
-  
-  totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
 }
 
 
@@ -206,7 +168,7 @@ function deleteOne(target) {
 
 // 수량 변경 함수
 function changeValue(target) {
-  let quant = Number(target.parentElement.firstElementChild.nextElementSibling.value);
+  let quant = Number(target.parentElement.querySelector('.product-quantity').value);
   if(target.value === '+') {
     quant++;
   }
@@ -217,12 +179,52 @@ function changeValue(target) {
     quant--;
   }
 
-  const index = Number(target.parentElement.parentElement.firstElementChild.innerText)
+  const index = Number(target.parentElement.parentElement.querySelector('#product-num').innerText);
   products[index-1].quantity = quant;
 
   saveProducts(products);
   getProducts();
 }
+
+
+// 개별 체크박스 클릭 함수
+function handleCheck(checkbox) {
+  // 개별 체크박스 선언
+  const checkBoxes = document.querySelectorAll('.product-check');
+  let isChecked = true;
+  Array.from(checkBoxes).forEach(box => {
+    if(box.checked === false) {
+      isChecked = false;
+      return;
+    }
+  })
+
+  if(isChecked) {
+    deleteAllBtn.checked = true;
+  }
+
+
+  const value = checkbox.checked;
+
+  const result = checkbox.parentElement.querySelector('.product-result').innerText;
+  const resultPrice = result.replace(/,/g, '');
+
+  if(value === false) {
+    // 하나라도 false면 전체 체크박스도 false
+    checkAllBox.checked = false;
+
+    sum -= Number(resultPrice);
+  }
+  else {
+    sum += Number(resultPrice);
+  }
+  
+  totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
+}
+
+
+
+
 
 
 
@@ -235,9 +237,6 @@ function changeValue(target) {
 // saveProducts(products);
 getProducts();
 
-// 개별 체크박스 선언
-const checkBoxes = document.querySelectorAll('.product-check');
-
 
 // 전체삭제 버튼 클릭 이벤트
 deleteAllBtn.addEventListener('click', handleDeleteAllBtnClick);
@@ -245,10 +244,6 @@ deleteAllBtn.addEventListener('click', handleDeleteAllBtnClick);
 
 // 전체 체크박스 클릭 이벤트
 checkAllBox.addEventListener('click', handleCheckAllClick);
-
-
-// 체크박스 개별 이벤트
-Array.from(checkBoxes).forEach(x => x.addEventListener('click', handleCheckClick));
 
 
 // 선택삭제 이벤트
