@@ -396,6 +396,7 @@ div {
     display: none;
   }
 
+
   .SiteHeaderMainNavItem .SiteHeaderMainNavItem__link {
     color: rgb(166, 166, 166);
   }
@@ -403,7 +404,6 @@ div {
   .SiteHeaderMainNavItem .SiteHeaderMainNavItem__link--active {
     color: black;
   }
-
 
 
   .SiteHeader__sub,
