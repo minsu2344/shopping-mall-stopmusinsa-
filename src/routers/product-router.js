@@ -48,12 +48,6 @@ productRouter.post(
               'headers의 Content-Type을 application/json으로 설정해주세요',
           );
         }
-        // only admin
-        if (req.currentUserRole !== 'admin') {
-          throw new Error(
-              '관리자만 사용 가능한 기능입니다.',
-          );
-        }
         // product 스키마에 따라
         const {
           name,
@@ -97,12 +91,7 @@ productRouter.patch(
               'headers의 Content-Type을 application/json으로 설정해주세요',
           );
         }
-        // only admin
-        if (req.currentUserRole !== 'admin') {
-          throw new Error(
-              '관리자만 사용 가능한 기능입니다.',
-          );
-        }
+
         const {productId} = req.params;
         const {
           name,
@@ -141,13 +130,6 @@ productRouter.delete(
     adminRequired,
     async (req, res, next) => {
       try {
-        // only admin
-        if (req.currentUserRole !== 'admin') {
-          throw new Error(
-              '관리자만 사용 가능한 기능입니다.',
-          );
-        }
-
         await productService.deleteProduct();
         res.status(200).send('상품 삭제 완료');
       } catch (error) {
@@ -162,12 +144,6 @@ productRouter.delete(
     adminRequired,
     async (req, res, next) => {
       try {
-        // only admin
-        if (req.currentUserRole !== 'admin') {
-          throw new Error(
-              '관리자만 사용 가능한 기능입니다.',
-          );
-        }
         const {productId} = req.params;
 
         const product = await productService.getProductById(productId);
