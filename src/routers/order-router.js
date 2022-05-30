@@ -1,7 +1,6 @@
 import {Router} from 'express';
-import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import {loginRequired} from '../middlewares';
+import {loginRequired, adminRequired} from '../middlewares';
 import {orderService} from '../services';
 
 const orderRouter = Router();
@@ -24,14 +23,18 @@ orderRouter.get('/orderlist/:userId/:fullname/:phoneNumber',
     });
 
 // 전체 주문 목록 조회
-orderRouter.get('/orderalllist', loginRequired, async (req, res, next) => {
-  try {
-    const orders = await orderService.getAllOrderList();
-    res.status(200).json(orders);
-  } catch (err) {
-    next(err);
-  }
-});
+orderRouter.get(
+    '/orderalllist',
+    loginRequired,
+    adminRequired,
+    async (req, res, next) => {
+      try {
+        const orders = await orderService.getAllOrderList();
+        res.status(200).json(orders);
+      } catch (err) {
+        next(err);
+      }
+    });
 
 // 주문 추가
 orderRouter.post('/addorder', async (req, res, next) => {
