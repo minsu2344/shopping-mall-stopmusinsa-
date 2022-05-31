@@ -80,3 +80,9 @@ div {
     --background-color: grey;
     --text-color: white;
 }
+
+/* Site */
+.Site__container {
+    width: 96%;
+    margin: 0 auto;
+}
