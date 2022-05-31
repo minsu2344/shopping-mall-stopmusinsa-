@@ -74,7 +74,7 @@ export default class Footer extends HTMLElement {
     // css 파일 추가
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
-    linkElem.setAttribute('href', '/src/views/components/Footer/Footer.css');
+    linkElem.setAttribute('href', '/src/views/components/common/Footer/Footer.css');
     this.appendChild(linkElem);
   }
 }

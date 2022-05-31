@@ -77,7 +77,7 @@ export default class Header extends HTMLElement {
     // css 파일 추가
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
-    linkElem.setAttribute('href', '/src/views/components/Header/Header.css');
+    linkElem.setAttribute('href', '/src/views/components/common/Header/Header.css');
     this.appendChild(linkElem);
   }
 }
