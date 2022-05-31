@@ -2,27 +2,43 @@ export default class ProductDetail extends HTMLElement {
   constructor() {
     super();
     // html 추가
+    const product = {
+      brand: '캘빈클라인 골프',
+      category: '원피스',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    };
     this.innerHTML = `
        <div class="ProductDetail">
             <div class="ProductDetail__brandBar">
-                <div class="Site__container">BRAND NAME</div>
+                <div class="Site__container">${product.brand}</div>
             </div>
             <div class="ProductDetail__container">
                 <div class="ProductDetail__header">
                     <div class="ProductDetailHeader__breadcrumb">
-                        <a>원피스</a>
+                        <a>${product.category}</a>
                     </div>
-                    <p class="ProductDetailHeader__brand">캘빈클라인 골프</p>
-                    <h2 class="ProductDetailHeader__title">[NF]링클워머 스워트 셋업</h2>
-                    <p class="ProductDetailHeader__price">98,000원</p>
+                    <p class="ProductDetailHeader__brand">${product.brand}</p>
+                    <h2 class="ProductDetailHeader__title">${product.name}</h2>
+                    <p class="ProductDetailHeader__price">${product.price}원</p>
                     <div class="ProductDetailHeader__border"></div>
                     <div class="ProductDetailHeader__info">
                         <p class="ProductDetailHeaderInfo__title">게섯거라 판매가</h4>
-                        <p class="ProductDetailHeaderInfo__body">79,000원</p>
+                        <p class="ProductDetailHeaderInfo__body">${product.price}원</p>
                     </div>
                     <div class="ProductDetailHeader__info">
                         <p class="ProductDetailHeaderInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailHeaderInfo__body">최대 3,1690원</p>
+                        <p class="ProductDetailHeaderInfo__body">최대 ${product.point}원</p>
                     </div>
                     <div class="ProductDetailHeader__textBoxes">
                         <div class="TextBox TextBox--red">게섯거라스토어는 전 상품 유료배송입니다.</div>
@@ -34,7 +50,7 @@ export default class ProductDetail extends HTMLElement {
                         <div class="ProductDetailImages__imageContainer">
                             <img
                                 class="ProductDetailImages__image"
-                                src="https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809"
+                                src="${product.image}"
                                 alt="product"
                             />
                         </div>
@@ -44,15 +60,15 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Product Info <span class="ProductDetailGroup__headerCaption">제품정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">브랜드/품번</h4>
-                                <p class="ProductDetailGroupItem__content">REORG / 2021SS-02-KHO-2</p>
+                                <p class="ProductDetailGroupItem__content">${product.brand} /${product.modelNumber}</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">시즌/성별</h4>
-                                <p class="ProductDetailGroupItem__content">2021 S/S / 여</p>
+                                <p class="ProductDetailGroupItem__content">${product.season} / ${product.sex}</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">조회수(1개월)</h4>
-                                <p class="ProductDetailGroupItem__content">5.6만 회 이상</p>
+                                <p class="ProductDetailGroupItem__content">${product.view}회 이상</p>
                             </div>
                             <div class="ProductDetailGroup__border"></div>
                         </div>
@@ -60,11 +76,11 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Delivery Info <span class="ProductDetailGroup__headerCaption">배송정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">출고정보</h4>
-                                <p class="ProductDetailGroupItem__content">REORG / 2021SS-02-KHO-2</p>
+                                <p class="ProductDetailGroupItem__content">${product.deliveryStart} 출고</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">배송방법</h4>
-                                <p class="ProductDetailGroupItem__content">국내배송/입점사 배송</p>
+                                <p class="ProductDetailGroupItem__content">${product.deliveryMethod}</p>
                             </div>
                             <div class="ProductDetailGroup__border"></div>
                         </div>
@@ -72,11 +88,11 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Price Info <span class="ProductDetailGroup__headerCaption">가격정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">게섯거라 판매가</h4>
-                                <p class="ProductDetailGroupItem__content">79,000원</p>
+                                <p class="ProductDetailGroupItem__content">${product.price}원</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">게섯거라 적립금</h4>
-                                <p class="ProductDetailGroupItem__content">최대 3,160원</p>
+                                <p class="ProductDetailGroupItem__content">최대 ${product.point}원</p>
                             </div>
                             <div class="ProductDetailGroup__textBoxes">
                                 <div class="TextBox TextBox--red">게섯거라스토어는 전 상품 유료배송입니다.</div>
@@ -146,7 +162,7 @@ export default class ProductDetail extends HTMLElement {
                         <p class="ProductDetailInfoHeader__report">해당 상품정보에 문제가 있으면 알려주세요.</p>
                     </div>
                     <div class="ProductDetailInfo__body">
-                        <img class="ProductDetailInfo__image" src="https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg" alt="detail info" />
+                        <img class="ProductDetailInfo__image" src="${product.detailImage}" alt="detail info" />
                     </div>
                 </div>
             </div>
