@@ -1,0 +1,150 @@
+/* Footer */
+.SiteFooter__contact {
+    border-top: 1px solid rgb(234, 234, 234);
+    border-bottom: 1px solid rgb(234, 234, 234);
+}
+
+.SiteFooterContact__container {
+    display: flex;
+    padding: 24px 0 32px 0;
+}
+
+.SiteFooterContactItem {
+    font-size: 12px;
+    margin-right: 48px;
+}
+
+.SiteFooterContactItem:not(:first-child) {
+    border-left: 1px solid rgb(234, 234, 234);
+    padding-left: 24px;
+}
+
+.SiteFooterContactItem__title {
+    font-size: 12px;
+}
+
+.SiteFooterContactItem__body {
+    margin-top: 16px;
+    margin-bottom: 0px;
+}
+
+.SiteFooterContactItem p {
+    line-height: 20px;
+}
+
+.SiteFooterContactItem__link:not(:last-child):after {
+    content: '|';
+    margin: 0 4px;
+    color: rgb(215, 215, 215);
+}
+
+/* SiteFooterGuarantee */
+.SiteFooterGuarantee__container {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.SiteFooterGuarantee__text {
+    font-size: 12px;
+}
+
+.SiteFooterGuarantee__title {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 8px 0;
+}
+
+.SiteFooterGuarantee__caption {
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.SiteFooterGuarantee__body {
+    color: #b2b2b2;
+    line-height: 16px;
+}
+
+.SiteFooterGuarantee__images {
+    display: flex;
+    align-self: flex-end;
+    padding-bottom: 24px;
+}
+
+.SiteFooterGuarantee__image {
+    width: 72px;
+    height: auto;
+    margin-right: 16px;
+}
+
+.SiteFooter__bottom {
+    background-color: black;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b2b2b2;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.SiteFooterBottom__URL {
+    color: white;
+}
+
+.SiteFooter__mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .SiteFooter {
+        background-color: black;
+        color: white;
+        padding-top: 32px;
+    }
+
+    .SiteFooter__contact {
+        border: none;
+    }
+
+    .SiteFooterContact__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .SiteFooterContactItem:not(:first-child) {
+        border: none;
+        padding: 0;
+    }
+
+    .SiteFooterContactItem:not(:last-child) {
+        display: none;
+    }
+
+    .SiteFooterContactItem {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+
+    .SiteFooterContactItem__links a {
+        color: white;
+    }
+
+    .SiteFooterContactItem > a {
+        color: white;
+    }
+
+    .SiteFooter__guarantee,
+    .SiteFooter__bottom {
+        display: none;
+    }
+
+    .SiteFooter__mobile {
+        display: block;
+        color: #6d6d6d;
+        font-size: 12px;
+        margin-top: 16px;
+        padding-bottom: 32px;
+    }
+}
