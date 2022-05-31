@@ -349,13 +349,13 @@
     }
     .ProductDetailHeaderInfo__title {
         margin: 0;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         width: 120px;
     }
     .ProductDetailHeaderInfo__body {
         margin: 0;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
     }
 
@@ -395,7 +395,7 @@
     }
 
     .ProductDetailMobileContentHeader__titleCaption {
-        font-size: 12px;
+        font-size: 14px;
         color: rgb(187, 187, 187);
         font-weight: 400;
         margin: 0 0 0 4px;
@@ -408,13 +408,13 @@
     }
     .ProductDetailMobileContentInfo__title {
         margin: 0;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         width: 120px;
     }
     .ProductDetailMobileContentInfo__body {
         margin: 0;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
     }
 
@@ -432,6 +432,7 @@
     }
     .ProductDetailInfoHeader__title {
         margin: 0;
+        font-size: 18px;
     }
     .ProductDetailInfoHeader__report {
         margin: 0;
