@@ -15,15 +15,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="../nomalize.css">
+    <!-- <link rel="stylesheet" href="../nomalize.css"> -->
     <link rel="stylesheet" href="pay.css" />
+    <script type="module" src="pay.js"></script>
   </head>
 
   <body>
@@ -49,7 +44,7 @@
           </div>
           <div class="phone">
             <label for="">휴대폰 번호</label>
-            <input type="number" placeholder="'-'없이 번호만 작성">
+            <input type="number" id="phone" placeholder="'-'없이 번호만 작성">
           </div>
           <div class="address">
             <label for="">주소</label>
@@ -138,12 +133,10 @@
           <div class="payment__method">
             <span>결제수단 선택</span>
             <div class="pay__card">
-              <label for="">신용카드</label>
-              <input type="radio" name="payment" value="card">
+              <input type="radio" name="payment" value="card">신용카드
             </div>
             <div class="pay__cash">
-              <label for="">무통장 입금</label>
-              <input type="radio" name="payment" value="cash">
+              <input type="radio" name="payment" value="cash">무통장 입금
             </div>
           </div>
           <div class="paymentBtn">
@@ -188,6 +181,5 @@
         <p> - 환불은 확인 후 영업일 기준 10년 뒤 순차적으로 처리됩니다.</p>
       </div>
     </div>
-    <script src="pay.js"></script>
   </body>
 </html>
