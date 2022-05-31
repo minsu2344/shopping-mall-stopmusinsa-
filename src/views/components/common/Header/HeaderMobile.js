@@ -9,17 +9,17 @@ export default class HeaderMobile extends HTMLElement {
                     <div class="HeaderMobileDefault__main">
                         <div class="HeaderMobileDefault__container Site__container">
                             <div>
-                                <a href="#" class="HeaderMobileDefault__icon HeaderMobileDefault__cart">
+                                <a href="/cart" class="HeaderMobileDefault__icon HeaderMobileDefault__cart">
                                     <img src="../../assets/images/shopping_bag.png" alt="cart" />
                                 </a>
                             </div>
                             <div>
                                 <div class="HeaderMobileDefault__logo">
-                                    <a class="HeaderMobileDefault__logoLink" href="">STOP MUSINSA</a>
+                                    <a class="HeaderMobileDefault__logoLink" href="/">STOP MUSINSA</a>
                                 </div>
                             </div>
                             <div>
-                                <a href="#" class="HeaderMobileDefault__profile">
+                                <a href="/profile" class="HeaderMobileDefault__profile">
                                     <img src="../../assets/images/profile.png" alt="profile" />
                                 </a>
                             </div>
@@ -29,17 +29,17 @@ export default class HeaderMobile extends HTMLElement {
                         <nav class="HeaderMobileDefaultNav">
                             <ul class="HeaderMobileDefaultNav__list">
                                 <li class="HeaderMobileDefaultNavItem">
-                                    <a class="HeaderMobileDefaultNavItem__link HeaderMobileDefaultNavItem__link--active" href="#">홈</a>
+                                    <a class="HeaderMobileDefaultNavItem__link HeaderMobileDefaultNavItem__link--active" href="/">홈</a>
                                     <div class="HeaderMobileDefaultNavItem__underbar"></div>
                                 </li>
                                 <li class="HeaderMobileDefaultNavItem">
-                                    <a class="HeaderMobileDefaultNavItem__link" href="#">상의</a>
+                                    <a class="HeaderMobileDefaultNavItem__link" href="/tops">상의</a>
                                 </li>
                                 <li class="HeaderMobileDefaultNavItem">
-                                    <a class="HeaderMobileDefaultNavItem__link" href="#">바지</a>
+                                    <a class="HeaderMobileDefaultNavItem__link" href="/pants">바지</a>
                                 </li>
                                 <li class="HeaderMobileDefaultNavItem">
-                                    <a class="HeaderMobileDefaultNavItem__link" href="#">아우터</a>
+                                    <a class="HeaderMobileDefaultNavItem__link" href="/outwears">아우터</a>
                                 </li>
                             </ul>
                         </nav>
@@ -48,15 +48,15 @@ export default class HeaderMobile extends HTMLElement {
                 <div class="HeaderMobile__detail">
                     <div class="HeaderMobileDetail__container Site__container">
                         <div class="HeaderMobileDetail__left">
-                            <a href="#" class="HeaderMobileDetail__link HeaderMobileDetail__prev">
+                            <a href="javascript:history.back()" class="HeaderMobileDetail__link HeaderMobileDetail__prev">
                                 <img class="HeaderMobileDetail__icon" src="../../assets/images/back.png" alt="back" />
                             </a>
                         </div>
                         <div class="HeaderMobileDetail__right">
-                            <a href="#" class="HeaderMobileDetail__link HeaderMobileDetail__profile">
+                            <a href="/profile" class="HeaderMobileDetail__link HeaderMobileDetail__profile">
                                 <img class="HeaderMobileDetail__icon" src="../../assets/images/profile.png" alt="profile" />
                             </a>
-                            <a href="#" class="HeaderMobileDetail__link HeaderMobileDetail__cart">
+                            <a href="/cart" class="HeaderMobileDetail__link HeaderMobileDetail__cart">
                                 <img class="HeaderMobileDetail__icon" src="../../assets/images/shopping_bag.png" alt="cart" />
                             </a>
                         </div>

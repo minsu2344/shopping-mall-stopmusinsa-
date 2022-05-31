@@ -30,8 +30,8 @@ export default class Footer extends HTMLElement {
                         <div class="FooterContactItem__body">
                             <div class="FooterContactItem__links">
                                 <a href="#" class="FooterContactItem__link">1544 -7199</a>
-                                <a href="#" class="FooterContactItem__link">1:1문의</a>
-                                <a href="#" class="FooterContactItem__link">이메일</a>
+                                <a href="javascript:alert("안받아용");" class="FooterContactItem__link">1:1문의</a>
+                                <a href="javascript:alert("문의시간이 아닙니다");" class="FooterContactItem__link">이메일</a>
                             </div>
                             <p>
                                 평일 오전 9시 - 오전 9시 1분 <br />
