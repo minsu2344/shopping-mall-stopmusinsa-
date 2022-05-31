@@ -79,9 +79,16 @@ body {
 
 .product-info {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 60%;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 8px;
 }
 
 .product-option {
