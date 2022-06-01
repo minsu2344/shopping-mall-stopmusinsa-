@@ -19,8 +19,9 @@ app.use(viewsRouter);
 
 
 // static file 경로 추가
-app.use('/assets', express.static(__dirname));
+app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/styles', express.static(__dirname + '/views/styles'));
+app.use('/components', express.static(__dirname + '/views/components'));
 // static files for components
 app.use('/src', express.static(__dirname));
 
