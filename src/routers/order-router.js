@@ -22,7 +22,7 @@ orderRouter.get('/member/orders', loginRequired, async (req, res, next) => {
 });
 
 // 비회원 조문 조회
-orderRouter.get('/non_member/orders', query('phone').isMobilePhone(['ko-KR']),
+orderRouter.get('/non-member/orders', query('phone').isMobilePhone(['ko-KR']),
     async (req, res, next) => {
       try {
         const {fullname, phone} = req.query;

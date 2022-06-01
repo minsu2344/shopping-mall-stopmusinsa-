@@ -21,7 +21,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.0",
     "passport-kakao": "^1.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "multer": "^1.4.4-lts.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -29,8 +30,6 @@
     "@babel/node": "^7.16.8",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
-    "@html-eslint/eslint-plugin": "^0.13.1",
-    "@html-eslint/parser": "^0.13.1",
     "eslint": "^8.16.0",
     "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.15"

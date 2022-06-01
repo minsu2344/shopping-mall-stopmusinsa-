@@ -1,24 +1,35 @@
 import {Router} from 'express';
 import is from '@sindresorhus/is';
-import {loginRequired, adminRequired} from '../middlewares';
+import {loginRequired, adminRequired, upload} from '../middlewares';
 import {productService} from '../services';
 
 const productRouter = Router();
+const filterQuery = (data) =>{
+  const obj = data;
+  Object.keys(obj).forEach((key)=>{
+    if (obj[key] === undefined) {
+      delete obj[key];
+    }
+  });
+  return obj;
+};
 
 //  GET api/product(상품 목록, 페이지네이션)
 productRouter.get('/', async (req, res, next) => {
-  const {page, show} = req.query;
+  const {page, show, brand, sex, color, main, sub} = req.query;
+  const option = filterQuery({brand, sex, color, main, sub});
+
   try {
     let product;
     // 로그인 여부에 관계없이 상품데이터 전달
     if (page && show) {
       // pagenation 적용
-      product = await productService.getProducts(page, show);
+      product = await productService.getProducts(option, page, show);
     } else {
       // 미적용
-      product = await productService.getProducts();
+      product = await productService.getProducts(option);
     }
-    res.status(201).json(product);
+    res.status(200).json(product);
   } catch (error) {
     next(error);
   }
@@ -35,11 +46,13 @@ productRouter.get('/:productId', async (req, res, next) => {
   }
 });
 
+
 //  POST api/product (상품 등록)
 productRouter.post(
     '/',
     loginRequired,
     adminRequired,
+    upload.single('image'),
     async (req, res, next) => {
       try {
         // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -57,7 +70,7 @@ productRouter.post(
           sex,
           description,
           colors,
-          sizes,
+          sizeIds,
           categories,
         } = req.body;
 
@@ -68,12 +81,26 @@ productRouter.post(
           brand,
           sex,
           description,
-          colors,
-          sizes,
-          categories,
+          categories: {_id: categories},
         };
+        // populate위한 전처리
+        if (Array.isArray(colors)) {
+          productInfo.colors = colors.map((id)=>{
+            return {color: {_id: id}};
+          });
+        } else {
+          productInfo.colors = {color: {_id: colors}};
+        }
+        if (Array.isArray(sizeIds)) {
+          productInfo.sizes = sizeIds.map((id)=>{
+            return {size: {_id: id}};
+          });
+        } else {
+          productInfo.sizes = {size: {_id: sizeIds}};
+        }
+
         const product = await productService.addProduct(productInfo);
-        res.status(200).json(product);
+        res.status(201).json(product);
       } catch (error) {
         next(error);
       }
@@ -92,7 +119,7 @@ productRouter.patch(
           );
         }
 
-        const {productId} = req.params;
+        // product 스키마에 따라
         const {
           name,
           price,
@@ -100,7 +127,7 @@ productRouter.patch(
           brand,
           sex,
           description,
-          colors,
+          colorIds,
           sizes,
           categories,
         } = req.body;
@@ -112,10 +139,24 @@ productRouter.patch(
           brand,
           sex,
           description,
-          colors,
-          sizes,
-          categories,
+          categories: {_id: categories},
         };
+        // populate위한 전처리
+        if (Array.isArray(colorIds)) {
+          productInfo.colors = colorIds.map((id)=>{
+            return {color: {_id: id}};
+          });
+        } else {
+          productInfo.colors = {color: {_id: colorIds}};
+        }
+        if (Array.isArray(sizes)) {
+          productInfo.sizes = sizes.map((id)=>{
+            return {size: {_id: id}};
+          });
+        } else {
+          productInfo.sizes = {size: {_id: sizes}};
+        }
+
         const product = await productService.setProduct(productId, productInfo);
         res.status(200).json(product);
       } catch (error) {
