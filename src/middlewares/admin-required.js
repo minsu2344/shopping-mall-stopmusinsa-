@@ -1,5 +1,5 @@
 function adminRequired(req, res, next) {
-  if (req.currentUserRole !== 'admin') {
+  if (req.user.role !== 'admin') {
     console.log('관리자 계정으로 로그인해주세요.');
     res.status(403).json({
       result: 'forbidden-approach',
