@@ -11,7 +11,7 @@ const PRODUCTS_KEY = 'products';
 let sum = 0;
 
 
-let products = [{_id: 'djf20', url: '../tabIcon.png', name: '나이키', size: 'L', price: '19000', quantity: 1}, {_id: '12fd1', url: '../tabIcon.png', name: '나이키', size: 'L', price: '19000', quantity: 1}];
+let products = [{_id: 'djf20', url: '../../assets/favicon.png', name: '나이키', size: 'L', price: '19000', quantity: 1}, {_id: '12fd1', url: '../../assets/favicon.png', name: '나이키', size: 'L', price: '19000', quantity: 1}];
 
 
 // 로컬스토리지 저장
@@ -220,7 +220,7 @@ function handleCheck(checkbox) {
 /* main */
 
 // 화면에 localStorage 띄우기
-// saveProducts(products);
+saveProducts(products);
 getProducts();
 
 
