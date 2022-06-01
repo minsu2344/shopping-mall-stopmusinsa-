@@ -20,6 +20,7 @@ export default class ProductCard extends HTMLElement {
     };
     // html 추가
     this.innerHTML = `
+      <a href="/product?id=12345">
         <div class="ProductCard">
             <div class="ProductCard__header">
                 <div class="ProductCard__ranking">${product.ranking}위</div>
@@ -33,6 +34,7 @@ export default class ProductCard extends HTMLElement {
                 <p class="ProductCard__price">${product.price}원</p>
             </div>
         </div>
+      </a>
     `;
 
     // css 파일 추가
