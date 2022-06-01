@@ -187,7 +187,6 @@ productRouter.delete(
       try {
         const {productId} = req.params;
 
-<<<<<<< HEAD
         const product = await productService.getProductById(productId);
         if (!product) {
           throw new Error('삭제할 대상 상품이 없습니다.');
@@ -198,16 +197,4 @@ productRouter.delete(
         next(error);
       }
     });
-=======
-    const product = await productService.getProductById(productId);
-    if (!product) {
-      throw new Error('삭제할 대상 상품이 없습니다.');
-    }
-    await productService.deleteProduct(productId);
-    res.status(200).send('상품 삭제 완료');
-  } catch (error) {
-    next(error);
-  }
-});
->>>>>>> feature/frontend/product-refactoring
 export default productRouter;
