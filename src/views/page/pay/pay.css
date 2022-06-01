@@ -22,6 +22,10 @@ sup {
   color: red;
 }
 
+h2 {
+  margin-bottom: 20px;
+}
+
 
 /* 메인 */
 
@@ -58,6 +62,10 @@ sup {
 .products__info__container,
 .warnning {
   margin: 0 20px;
+}
+
+.recipient__info h2 {
+  margin-top: 30px;
 }
 
 
@@ -178,17 +186,23 @@ sup {
   display: flex;
   flex-direction: column;
   border: 2px solid var(--border-color);
+  border-right: none;
 }
 
 
 
 .products__info__title,
-.products__main {
+.product {
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
 }
 
 .products__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.product {
   border-top: 2px solid var(--border-color);
 }
 
@@ -218,7 +232,7 @@ sup {
   height: 50px;
 }
 
-.name__size {
+.name__option {
   margin-left: 10px;
 }
 
@@ -227,7 +241,7 @@ sup {
   color: rgb(52, 52, 52);
 }
 
-.size {
+.option {
   font-size: 12px;
   color: rgb(144, 144, 144);
 }
