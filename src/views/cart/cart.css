@@ -8,12 +8,9 @@ body {
 
 /* 카트 상단 타이틀 */
 .cart-container {
-  position: absolute;
-  top: 200px;
-  left: 300px;
-  width: calc(100% - 310px);
+  margin: 40px;
+  width: 95%;
   border: 2px solid rgba(34, 34, 37, 0.11);
-  margin-bottom: 100px;
 }
 
 .cart-title-box {

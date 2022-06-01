@@ -18,16 +18,17 @@ body {
   --focus-color: #ecf3fd;
 }
 
+sup {
+  color: red;
+}
+
 
 /* 메인 */
 
 .pay__container {
-  position: absolute;
-  top: 200px;
-  left: 300px;
-  width: calc(100% - 310px);
+  margin: 40px;
+  width: 95%;
   border: 2px solid var(--border-color);
-  margin-bottom: 100px;
 }
 
 .pay__title__box {

@@ -11,6 +11,7 @@ const form = document.querySelector('form');
 
 async function handleFormSubmit(e) {
   e.preventDefault();
+  console.log(e);
   const fullname = userName.value;
   const phoneNumber = phone.value;
   const postalcode = postCode.value;
@@ -30,7 +31,7 @@ async function handleFormSubmit(e) {
       paymentMethod,
     }
   
-    await Api.post('/api/order/', data);
+    await Api.post('localhost:5000/api/order/', data);
   
     location.href = '../home/home.html';
   }

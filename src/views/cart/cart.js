@@ -44,6 +44,7 @@ function getProducts() {
   if(sum === 0) {
     totalPrice.disabled = 'disabled';
     totalPrice.classList.add('disabled');
+    totalPrice.value = `장바구니가 비었습니다.`
     totalPrice.style = `
       background-color: rgb(57, 56, 56);
       color: white;
@@ -223,7 +224,7 @@ function handleCheck(checkbox) {
     totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
   }
   else {
-    totalPrice.value = `총 ${sum}원 주문하기`;
+    totalPrice.value = `장바구니가 비었습니다.`;
   }
 }
 
