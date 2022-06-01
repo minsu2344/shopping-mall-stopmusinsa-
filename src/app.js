@@ -19,11 +19,11 @@ app.use(viewsRouter);
 
 
 // static file 경로 추가
-console.log(__dirname);
 app.use('/assets', express.static(__dirname));
+app.use('/styles', express.static(__dirname + '/views/styles'));
 // static files for components
 app.use('/src', express.static(__dirname));
-app.use('/styles', express.static(__dirname + '/views/styles'));
+
 
 // api 라우팅
 // 아래처럼 하면, userRouter 에서 '/login' 으로 만든 것이 실제로는 앞에 /api가 붙어서
