@@ -9,7 +9,7 @@ const orderRouter = Router();
 // 회원 주문 조회
 orderRouter.get('/member/orders', loginRequired, async (req, res, next) => {
   try {
-    const userId = req.currentUserId;
+    const userId = req.user.userId;
     const orderInfo = {
       userId: userId,
     };
@@ -45,17 +45,17 @@ orderRouter.get('/non_member/orders', query('phone').isMobilePhone(['ko-KR']),
 
 // 전체 주문 목록 조회
 orderRouter.get(
-  '/orders', 
-  loginRequired, 
-  adminRequired,
-  async (req, res, next) => {
-  try {
-    const orders = await orderService.getOrders();
-    res.status(200).json(orders);
-  } catch (err) {
-    next(err);
-  }
-});
+    '/orders',
+    loginRequired,
+    adminRequired,
+    async (req, res, next) => {
+      try {
+        const orders = await orderService.getOrders();
+        res.status(200).json(orders);
+      } catch (err) {
+        next(err);
+      }
+    });
 
 // 주문 추가
 orderRouter.post('/', async (req, res, next) => {
