@@ -38,7 +38,7 @@ export default class HeaderPC extends HTMLElement {
                 </div>
                 <div class="Header__member">
                     <div class="HeaderMember__container Site__container">
-                        <button class="Button Button--outline">로그인</button>
+                        <a href="/login" class="Button Button--outline">로그인</a>
                         <div class="HeaderMemberMenus">
                             <div class="HeaderMemberMenu">
                                 <a class="HeaderMemberMenu__link" href="/register">회원가입</a>
