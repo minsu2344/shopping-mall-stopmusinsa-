@@ -11,7 +11,7 @@ const PRODUCTS_KEY = 'products';
 let sum = 0;
 
 
-let products = [{_id: 'djf20', url: '../../assets/favicon.png', name: '나이키', size: 'L', price: '19000', quantity: 1}, {_id: '12fd1', url: '../../assets/favicon.png', name: '나이키', size: 'L', price: '19000', quantity: 1}];
+let products = [{_id: 'djf20', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}, {_id: '12fd1', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}];
 
 
 // 로컬스토리지 저장
@@ -30,11 +30,11 @@ function getProducts() {
   JSON.parse(localStorage.products).forEach((items, i) => {
     const element = JSON.parse(localStorage.getItem(PRODUCTS_KEY)).map((value, i) => {
       const index = i + 1;
-      const {url, name, size, price, quantity} = value;
+      const {image, name, option, price, quantity} = value;
       const result = price * quantity;
       sum += result;
 
-      return paintProductBox(index, url, name, size, price, quantity, result);
+      return paintProductBox(index, image, name, option, price, quantity, result);
     });
     productBox.innerHTML = element.join('\n');
   });
@@ -63,16 +63,16 @@ function getProducts() {
 
 
 // 화면에 getProducts 띄우기
-function paintProductBox(index, url, name, size, price, quantity, result) {
+function paintProductBox(index, image, name, option, price, quantity, result) {
   return `
   <div class="product">
       <p id="product-num">${index}</p>
       <input type="checkbox" name="" class="product-check" checked onclick="handleCheck(this)">
       <div class="product-info">
-        <img src="${url}" alt="picture" style="width: 50px;">
+        <img src="${image}" alt="picture" style="width: 50px;">
         <div class="option">
           <p class="product-name">${name}</p>
-          <p class="product-option">SIZE: ${size}</p>
+          <p class="product-option">OPTION: ${option}</p>
         </div>
         </div>
         <p class="product-price">${Number(price).toLocaleString()}</p>
@@ -191,7 +191,7 @@ function handleCheck(checkbox) {
   });
 
   if (isChecked) {
-    deleteAllBtn.checked = true;
+    checkAllBox.checked = true;
   }
 
 
@@ -220,7 +220,7 @@ function handleCheck(checkbox) {
 /* main */
 
 // 화면에 localStorage 띄우기
-saveProducts(products);
+// saveProducts(products);
 getProducts();
 
 
@@ -234,3 +234,31 @@ checkAllBox.addEventListener('click', handleCheckAllClick);
 
 // 선택삭제 이벤트
 deleteBtn.addEventListener('click', hadleDeleteBtnClick);
+
+
+
+
+
+
+
+
+
+// 장바구니 넣을 때
+// const product = Api.get('localhost:5000/api/product/', 'productId');
+// const {_id, name, image, price} = product;
+// const option = ;
+
+// let products = [];
+
+// const data = {
+//   _id,
+//   image,
+//   name,
+//   price,
+//   option,
+//   quantity: 1,
+// }
+
+// products.push(data);
+
+// localStorage.setItem('products', products);
