@@ -17,7 +17,7 @@ async function handleFormSubmit(e) {
   const postalcode = postCode.value;
   const address1 = roadAddress.value;
   const address2 = detailAddress.value;
-  const paymentMethod = Array.from(payment).filter(method => method.checked === true)[0].value;
+  const paymentMethod = Array.from(payment).filter((method) => method.checked === true)[0].value;
 
   try {
     const data = {
@@ -29,13 +29,12 @@ async function handleFormSubmit(e) {
         address2,
       },
       paymentMethod,
-    }
-  
+    };
+
     await Api.post('localhost:5000/api/order/', data);
-  
+
     location.href = '../home/home.html';
-  }
-  catch(err) {
+  } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
