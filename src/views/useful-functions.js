@@ -27,3 +27,8 @@ export const convertToNumber = (string) => {
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
+export const JWTDecode = (token) => {
+  const {userId, role} = JSON.parse(atob(token.split('.')[1]));
+  return {userId, role};
+};
