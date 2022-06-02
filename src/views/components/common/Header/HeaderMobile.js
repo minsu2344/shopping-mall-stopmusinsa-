@@ -64,6 +64,7 @@ export default class HeaderMobile extends HTMLElement {
                 </div>
             </div>
     `;
+    this.markSelection();
     this.renderByType();
   }
   renderByType() {
@@ -75,6 +76,22 @@ export default class HeaderMobile extends HTMLElement {
       this.querySelector('.HeaderMobile__default').style.display = 'block';
       this.querySelector('.HeaderMobile__detail').style.display = 'none';
     }
+  }
+  markSelection() {
+    // 선택 제거
+    const previousSelection = this.querySelector('.HeaderMobileDefaultNavItem__link--active');
+    previousSelection.classList.remove('HeaderMobileDefaultNavItem__link--active');
+
+    // href가 현재 url과 일치하면 현재 선택 추가
+    // HeaderMobileDefaultNavItem__link;
+    const urlPaths = document.URL.split('/');
+    const currentPath = '/' + urlPaths[3];
+    const links = this.querySelectorAll('.HeaderMobileDefaultNavItem__link');
+    links.forEach((link) => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('HeaderMobileDefaultNavItem__link--active');
+      }
+    });
   }
 }
 window.customElements.define('common-header-mobile', HeaderMobile);
