@@ -1,4 +1,4 @@
-import * as Api from '/api.js';
+import * as Api from '../../js/api';
 
 const userName = document.querySelector('#name');
 const phone = document.querySelector('#phone');
@@ -53,7 +53,10 @@ async function handleFormSubmit(e) {
 
     await Api.post('localhost:5000/api/order/', data);
 
-    location.href = '../home/home.html';
+    const products = [];
+    localStorage.setItem('products', products);
+
+    location.href = '/payFinish';
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
@@ -101,3 +104,28 @@ form.addEventListener('submit', handleFormSubmit);
 
 getProducts();
 priceSum();
+
+
+
+
+// payFinish HTML 함수
+function realFinish() {
+  location.href = '/';
+}
+
+async function cancleOrder() {
+  const result = confirm('주문을 취소하시겠습니까?');
+  
+  try {
+    if(result) {
+      const data = {status: }
+      await Api.patch('localhost:5000/api/order/o/:', data);
+      alert('주문이 취소되었습니다.');
+      location.href = '/';
+    }
+  }
+  catch(err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
