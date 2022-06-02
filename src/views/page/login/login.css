@@ -34,6 +34,10 @@ body {
   font-weight: 600;
 }
 
+.has-text-link {
+  color: white;
+}
+
 .login-form-container {
   display: flex;
   align-items: center;
