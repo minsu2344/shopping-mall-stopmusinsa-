@@ -27,17 +27,16 @@ function getProducts() {
 
   sum = 0;
 
-  JSON.parse(localStorage.products).forEach((items, i) => {
-    const element = JSON.parse(localStorage.getItem(PRODUCTS_KEY)).map((value, i) => {
-      const index = i + 1;
-      const {image, name, option, price, quantity} = value;
-      const result = price * quantity;
-      sum += result;
 
-      return paintProductBox(index, image, name, option, price, quantity, result);
-    });
-    productBox.innerHTML = element.join('\n');
+  const element = JSON.parse(localStorage.getItem(PRODUCTS_KEY)).map((value, i) => {
+    const index = i + 1;
+    const {image, name, option, price, quantity} = value;
+    const result = price * quantity;
+    sum += result;
+
+    return paintProductBox(index, image, name, option, price, quantity, result);
   });
+  productBox.innerHTML = element.join('\n');
 
   totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
   if (sum === 0) {
@@ -173,7 +172,7 @@ function changeValue(target) {
   const index = Number(target.parentElement.parentElement.querySelector('#product-num').innerText);
   products[index - 1].quantity = quant;
 
-  saveProducts(products);
+  saveProducts();
   getProducts();
 }
 
