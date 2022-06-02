@@ -24,6 +24,10 @@
   transition: all 0.3s ease;
 }
 
+.has-text-link {
+  color: white;
+}
+
 .login:hover {
   background-color: rgb(41, 40, 40);
   color: white;
