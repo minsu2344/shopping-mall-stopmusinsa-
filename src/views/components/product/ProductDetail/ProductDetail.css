@@ -34,6 +34,11 @@
     cursor: pointer;
     font-size: 14px;
 }
+.ProductDetailHeader__breadcrumbArrow {
+    display: inline-block;
+    margin: 0 4px;
+    color: #b2b2b2;
+}
 
 .ProductDetailHeader__title {
     margin-top: 16px;
@@ -268,6 +273,13 @@
     .ProductDetail__content {
         display: none;
     }
+    .ProductDetailHeader__breadcrumbArrow {
+        display: inline-block;
+        margin: 0 2px;
+        position: relative;
+        top: 2px;
+        color: #b2b2b2;
+    }
     /* header */
 
     .ProductDetail__header {
@@ -284,6 +296,7 @@
     .ProductDetailHeader__breadcrumb a {
         font-size: 12px;
     }
+
     .ProductDetailHeader__brand {
         margin-top: 16px;
         color: #4478ff;

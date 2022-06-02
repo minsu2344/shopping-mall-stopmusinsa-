@@ -26,7 +26,7 @@ export default class ProductDetail extends HTMLElement {
                 <div class="ProductDetail__header">
                     <div class="ProductDetailHeader__breadcrumb">
                         <a>${product.categories.item}</a>
-                        <span> \> </span>
+                        <span class="ProductDetailHeader__breadcrumbArrow"> &gt </span>
                         <a>${product.categories.subitem}</a>
                     </div>
                     <p class="ProductDetailHeader__brand">${product.brand}</p>
