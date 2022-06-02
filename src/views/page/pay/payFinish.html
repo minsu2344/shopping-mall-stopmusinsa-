@@ -30,21 +30,14 @@
         <common-header></common-header>
         <div class="pay__container">
             <div class="finish__ment">
-              <h2>결제가 완료되었습니다!</h2>
+                <h2>결제가 완료되었습니다!</h2>
             </div>
             <div class="btn__box">
-              <div class="cancle__btn">
-                <input
-                    type="button"
-                    id="cancle__btn"
-                    value="주문취소"
-                />
-              </div>
-              <div class="finish__btn">
-                <input
-                    type="button"
-                    id="finish__btn"
-                    value="완료"
+                <div class="cancle__btn">
+                    <input type="button" id="cancle__btn" value="주문취소" onclick="cancleOrder();" />
+                </div>
+                <div class="finish__btn">
+                    <input type="button" id="finish__btn" value="완료" onclick="realFinish();"
                 />
             </div>
             </div>
