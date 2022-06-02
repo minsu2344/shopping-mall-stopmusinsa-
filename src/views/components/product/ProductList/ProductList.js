@@ -1,6 +1,6 @@
+import * as Api from '../../../js/api.js';
 export default class ProductList extends HTMLElement {
-  constructor() {
-    super();
+  connectedCallback() {
     const title = this.getAttribute('title') ? ' - ' + this.getAttribute('title') : '';
     // html 추가
     this.innerHTML = `
@@ -8,30 +8,368 @@ export default class ProductList extends HTMLElement {
             <div class="ProductList__container Site__container">
                 <h2 class="ProductList__title">실시간 랭킹${title} </h2>
                 <div class="ProductList__products">
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
-                    <product-card></product-card>
                 </div>
             </div>
         </div>
     `;
-
     // css 파일 추가
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
     linkElem.setAttribute('href', '/src/views/components/product/ProductList/ProductList.css');
     this.appendChild(linkElem);
+
+    // Product Card 동적으로 추가
+    this.addProductCards();
+  }
+  async addProductCards() {
+    const data = await Api.get('/api/product');
+    console.log(data);
+    const products = [{
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }, {
+      ranking: 1,
+      categories: {item: '하의', subitem: '슬랙스'},
+      brand: '캘빈클라인 골프',
+      name: '[NF]링클워머 스워트 셋업',
+      price: '98000',
+      point: '3169',
+      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      modelNumber: '2021SS-02-KHO-2',
+      season: '2021 S/S',
+      sex: '여',
+      view: '56000',
+      deliveryStart: '06.15',
+      deliveryMethod: '국내배송/입점사 배송',
+      options: [],
+      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
+    }];
+
+    products.forEach((product) => {
+      this.addProductCard(product);
+    });
+  }
+  addProductCard(product) {
+    const productList = document.querySelector('.ProductList__products');
+    const productCard = document.createElement('product-card');
+    productCard.product = product;
+    productList.appendChild(productCard);
   }
 }
 window.customElements.define('product-list', ProductList);

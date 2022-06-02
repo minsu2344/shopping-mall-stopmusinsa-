@@ -1,24 +1,10 @@
 export default class ProductCard extends HTMLElement {
   constructor() {
     super();
-    const product = {
-      brand: '캘빈클라인 골프',
-      ranking: 1,
-      category: '원피스',
-      name: '[NF]링클워머 스워트 셋업',
-      price: '98000',
-      point: '3169',
-      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
-      modelNumber: '2021SS-02-KHO-2',
-      season: '2021 S/S',
-      sex: '여',
-      view: '56000',
-      deliveryStart: '06.15',
-      deliveryMethod: '국내배송/입점사 배송',
-      options: [],
-      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
-    };
+  }
+  connectedCallback() {
     // html 추가
+    const product = this._product;
     this.innerHTML = `
       <a href="/product?id=12345">
         <div class="ProductCard">
@@ -42,6 +28,12 @@ export default class ProductCard extends HTMLElement {
     linkElem.setAttribute('rel', 'stylesheet');
     linkElem.setAttribute('href', '/src/views/components/product/ProductCard/ProductCard.css');
     this.appendChild(linkElem);
+  }
+  get product() {
+    return this._product;
+  }
+  set product(product) {
+    this._product = product;
   }
 }
 window.customElements.define('product-card', ProductCard);
