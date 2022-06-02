@@ -1,4 +1,4 @@
-// import * as Api from '/api.js';
+import * as Api from '/api.js';
 
 const userName = document.querySelector('#name');
 const phone = document.querySelector('#phone');
