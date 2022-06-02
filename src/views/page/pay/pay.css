@@ -113,7 +113,7 @@ h2 {
 
 .finded__address {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   margin-top: 8px;
   grid-column-gap: 4px;
 }
