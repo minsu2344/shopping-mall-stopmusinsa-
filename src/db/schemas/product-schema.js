@@ -58,17 +58,17 @@ const ProductSchema = new Schema(
         required: true,
         default: 0,
       },
-      deleveryStart: {
+      deliveryStart: {
         type: String,
         required: true,
-        default: new Date(),
+        default: '220603',
       },
-      deleveryMethod: {
+      deliveryMethod: {
         type: String,
         required: true,
         default: '입점사 배송',
       },
-       detailImage: {
+      detailImage: {
         type: String,
         required: true,
       },
