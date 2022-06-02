@@ -1,3 +1,4 @@
+import {JWTDecode} from '../../../js/useful-functions.js';
 export default class HeaderMobile extends HTMLElement {
   constructor() {
     super();
@@ -65,15 +66,29 @@ export default class HeaderMobile extends HTMLElement {
             </div>
     `;
     this.renderByType();
+    this.renderByRole();
   }
   renderByType() {
     const type = this.getAttribute('type');
     if (type === 'detail') {
       this.querySelector('.HeaderMobile__default').style.display = 'none';
-      this.querySelector('.HeaderMobile__detail').style.display='block';
+      this.querySelector('.HeaderMobile__detail').style.display = 'block';
     } else {
       this.querySelector('.HeaderMobile__default').style.display = 'block';
-      this.querySelector('.HeaderMobile__detail').style.display='none';
+      this.querySelector('.HeaderMobile__detail').style.display = 'none';
+    }
+  }
+  renderByRole() {
+    const token = sessionStorage.getItem('token');
+    const {role} = JWTDecode(token);
+    const nav = document.querySelector('.HeaderMobileDefaultNav__list');
+
+    if (role === 'admin') {
+      nav.innerHTML += `
+            <li class="HeaderMobileDefaultNavItem">
+                <a class="HeaderMobileDefaultNavItem__link" href="/admin">admin</a>
+            </li>
+        `;
     }
   }
 }

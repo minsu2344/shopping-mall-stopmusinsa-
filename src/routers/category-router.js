@@ -183,7 +183,7 @@ categorytRouter.delete(
         }
         await categoryService.deleteCategory(categoryId, replaceCategoryIdArray);
 
-        res.status(200).json();
+        res.status(200).json({});
       } catch (error) {
         next(error);
       }
@@ -204,7 +204,7 @@ categorytRouter.delete(
 
         await categoryService.deleteColor(colorId);
 
-        res.status(200).json();
+        res.status(200).json({});
       } catch (error) {
         next(error);
       }
@@ -223,7 +223,7 @@ categorytRouter.delete(
         }
         await categoryService.deleteSize(sizeId);
 
-        res.status(200).json();
+        res.status(200).json({});
       } catch (error) {
         next(error);
       }

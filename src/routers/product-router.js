@@ -50,11 +50,10 @@ productRouter.get('/:productId', async (req, res, next) => {
 //  POST api/product (상품 등록)
 productRouter.post(
     '/',
-    loginRequired,
-    adminRequired,
-    upload.single('image'),
+    upload.fields([{name: 'image'}, {name: 'description'}]),
     async (req, res, next) => {
       try {
+        console.log(req.body)
         // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
         if (is.emptyObject(req.body)) {
           throw new Error(
@@ -70,7 +69,7 @@ productRouter.post(
           sex,
           description,
           colors,
-          sizeIds,
+          sizes,
           categories,
         } = req.body;
 
@@ -91,12 +90,12 @@ productRouter.post(
         } else {
           productInfo.colors = {color: {_id: colors}};
         }
-        if (Array.isArray(sizeIds)) {
-          productInfo.sizes = sizeIds.map((id)=>{
+        if (Array.isArray(sizes)) {
+          productInfo.sizes = sizes.map((id)=>{
             return {size: {_id: id}};
           });
         } else {
-          productInfo.sizes = {size: {_id: sizeIds}};
+          productInfo.sizes = {size: {_id: sizes}};
         }
 
         const product = await productService.addProduct(productInfo);
@@ -110,6 +109,7 @@ productRouter.patch(
     '/:productId',
     loginRequired,
     adminRequired,
+    upload.fields([{name: 'image'}, {name: 'description'}]),
     async (req, res, next) => {
       try {
         // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
@@ -127,7 +127,7 @@ productRouter.patch(
           brand,
           sex,
           description,
-          colorIds,
+          colors,
           sizes,
           categories,
         } = req.body;
@@ -142,12 +142,12 @@ productRouter.patch(
           categories: {_id: categories},
         };
         // populate위한 전처리
-        if (Array.isArray(colorIds)) {
-          productInfo.colors = colorIds.map((id)=>{
+        if (Array.isArray(colors)) {
+          productInfo.colors = colors.map((id)=>{
             return {color: {_id: id}};
           });
         } else {
-          productInfo.colors = {color: {_id: colorIds}};
+          productInfo.colors = {color: {_id: colors}};
         }
         if (Array.isArray(sizes)) {
           productInfo.sizes = sizes.map((id)=>{
@@ -172,7 +172,7 @@ productRouter.delete(
     async (req, res, next) => {
       try {
         await productService.deleteProduct();
-        res.status(200).send('상품 삭제 완료');
+        res.status(200).json('상품 삭제 완료');
       } catch (error) {
         next(error);
       }
@@ -192,7 +192,7 @@ productRouter.delete(
           throw new Error('삭제할 대상 상품이 없습니다.');
         }
         await productService.deleteProduct(productId);
-        res.status(200).send('상품 삭제 완료');
+        res.status(200).json('상품 삭제 완료');
       } catch (error) {
         next(error);
       }

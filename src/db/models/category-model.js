@@ -16,7 +16,7 @@ export class CategoryModel {
     const filter = {item: categoryName};
     let updatedCategory;
     if (subCategoryName) {
-      filter={subItem: subCategoryName};
+      filter = {subItem: subCategoryName};
       // 서브 카테고리 수정
       updatedCategory = await Category.findOneAndUpdate(filter, updateData, option);
     } else {
@@ -48,7 +48,7 @@ export class CategoryModel {
   async findByName(categoryName, subCategoryName) {
     let category;
     if (subCategoryName) {
-      category = await Category.findOne({item: categoryName, subItem: subCategoryName});
+      category = await Category.findOne({$and: [{item: categoryName}, {subItem: subCategoryName}]});
     } else {
       category = await Category.find({item: categoryName});
     }

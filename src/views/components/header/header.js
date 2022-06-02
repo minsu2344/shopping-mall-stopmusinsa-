@@ -1,14 +1,7 @@
-import {JWTDecode} from '../../useful-functions.js';
 export default class Header {
-  constructor(target, token) {
+  constructor(target, role) {
     this.header = document.createElement('header');
-    const decoded = JWTDecode(token);
-    this.userId = decoded.userId;
-    this.role = decoded.role;
     this.header.className = 'SiteHeader';
-    if(userId){
-        
-    }
     target.appendChild(this.header);
     this.render();
   }
@@ -26,7 +19,6 @@ export default class Header {
                 <div class="SiteHeaderMain__right">
                     <nav class="SiteHeaderMainNav">
                         <ul class="SiteHeaderMainNav__list">
-                            ${this.role === 'admin' && '<li class=\'SiteHeaderMainNavItem\'><a class=\'SiteHeaderMainNavItem__link\' href=\'#\'>admin</a></li>'}
                             <li class="SiteHeaderMainNavItem">
                                 <a class="SiteHeaderMainNavItem__link" href="#">홈</a>
                             </li>

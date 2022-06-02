@@ -21,12 +21,19 @@ body {
   color: #6e6e6e;
 }
 
+/*Button*/
 .Button {
-  font-size: 12px;
-  width: 148px;
-  height: 28px;
-  transition: all .3s;
+  --background-color: black;
+  --text-color: white;
+  box-sizing: content-box;
+  padding: 8px 48px;
   cursor: pointer;
+  transition: all 0.3s;
+  font-size: 12px;
+  line-height: 12px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
 }
 
 .Button--secondary {
@@ -39,8 +46,6 @@ body {
   background-color: black;
   color: white;
 }
-
-.Button--secondary {}
 
 /* SiteHeaderMain */
 
@@ -281,7 +286,101 @@ body {
   color: white;
 }
 
+.container {
+  display: flex;
+  width: 100%;
+}
 
+.SideBarContainer {
+  flex: 1;
+}
+
+.SideBarContainer__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid silver;
+}
+
+.SideBarContainer__list:hover {
+  cursor: pointer;
+}
+
+.EditContainer {
+  min-height: 500px;
+  padding: 50px;
+  margin-left: 20px;
+  border-left: 1px solid silver;
+  flex: 5;
+}
+
+.EditContainer__title {
+  margin: 20px;
+  margin-bottom: 40px;
+}
+
+.EditContainer__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.EditContainer__content__row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.categoryUpdateForm {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+  border: 2px solid silver;
+}
+
+.productRegisterForm {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.productRegisterForm select {
+  margin: 10px;
+}
+
+.productRegisterForm input {
+  margin-bottom: 10px;
+}
+
+.productuList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  height: 130px;
+  border: 2px solid black;
+  margin:5px;
+}
+
+.productList__desc {
+  flex:4;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.productList__btns {
+  flex: 1;
+  display: flex;
+  align-items: bottom;
+}
 
 @media (max-width: 576px) {}
 
