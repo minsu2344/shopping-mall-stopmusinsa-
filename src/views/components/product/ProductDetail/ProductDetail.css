@@ -17,12 +17,13 @@
     font-size: 14px;
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
 }
 
 /* Container */
 .ProductDetail__container {
     max-width: 1200px;
-    margin: 48px 0;
+    margin: 40px 0;
     width: 100%;
 }
 
@@ -250,6 +251,9 @@
         flex-direction: column;
         margin-top: 0;
         width: 100%;
+    }
+    .ProductDetail__brandBar {
+        display: block;
     }
     /* topContainer */
     .ProductDetail__topContainer {
