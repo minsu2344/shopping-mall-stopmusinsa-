@@ -61,6 +61,16 @@ userRouter.post('/login', passport.authenticate('local', {session: false}), asyn
     next(error);
   }
 });
+// 사용자 정보 요청
+userRouter.get('/', loginRequired, async function(req, res, next) {
+  try {
+    const userId = req.user.userId;
+    const user = await userService.getUser(userId);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
 // 전체 유저 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
@@ -83,7 +93,7 @@ userRouter.get(
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
-    '/:userId',
+    '/',
     loginRequired,
     async function(req, res, next) {
       try {
@@ -96,7 +106,7 @@ userRouter.patch(
         }
 
         // params로부터 id를 가져옴
-        const userId = req.params.userId;
+        const userId = req.user.userId;
 
         // body data 로부터 업데이트할 사용자 정보를 추출함.
         const fullName = req.body.fullName;
@@ -138,5 +148,20 @@ userRouter.patch(
       }
     },
 );
+
+// 회원 탈퇴
+userRouter.delete('/', loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+
+    // 현재 로그인된 사용자 회원 탈퇴 진행
+    const deleteUserInfo = await userService.deleteUser(userId);
+
+    // 탈퇴 결과 프론트로 전달
+    res.status(200).json(deleteUserInfo);
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default userRouter;
