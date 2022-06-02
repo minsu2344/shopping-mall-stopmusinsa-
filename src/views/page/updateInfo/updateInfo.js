@@ -7,7 +7,9 @@ const postCdoe = document.querySelector('#sample6_postcode');
 const address = document.querySelector('#sample6_address');
 const detailAdd = document.querySelector('#sample6_detailAddress');
 const form = document.querySelector('form');
+const deleteBtn = document.querySelector('#delete__btn');
 
+// 폼 제출 함수
 async function handleFormSubmit(e) {
   e.preventDefault();
 
@@ -38,8 +40,33 @@ async function handleFormSubmit(e) {
   }
 }
 
+// 기존 회원 정보 넣기
 async function paintUserInfo() {
   const user = Api.get();
 }
 
+// 회원탈퇴 버튼 클릭 함수
+async function handleDeleteBtnClick() {
+  const result = confirm('정말로 회원탈퇴를 하시겠습니까?');
+
+  try {
+    if(result) {
+      await Api.del
+    }
+  }
+  catch(err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+// 유저 정보 api에서 가져오기
+async function getUserInfo() {
+  const user = await Api.get('localhost5000:/api/user/userlist', )
+}
+
+// 폼 제출 이벤트
 form.addEventListener('submit', handleFormSubmit);
+
+// 회원 탈퇴 버튼 클릭 이벤트
+deleteBtn.addEventListener('click', handleDeleteBtnClick);
