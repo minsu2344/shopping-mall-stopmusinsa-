@@ -6,7 +6,7 @@ export default class ProductList extends HTMLElement {
     this.innerHTML = `
         <div class="ProductList">
             <div class="ProductList__container Site__container">
-                <h2 class="ProductList__title">실시간 랭킹${title} </h2>
+                <h2 class="ProductList__title">제품 보기${title} </h2>
                 <div class="ProductList__products">
                 </div>
             </div>

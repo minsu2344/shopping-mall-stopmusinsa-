@@ -22,7 +22,7 @@ export default class ProductDetail extends HTMLElement {
             <div class="ProductDetail__brandBar">
                 <div class="Site__container">${product.brand}</div>
             </div>
-            <div class="ProductDetail__container">
+            <div class="ProductDetail__container Site__container">
                 <div class="ProductDetail__header">
                     <div class="ProductDetailHeader__breadcrumb">
                         <a>${product.categories.item}</a>

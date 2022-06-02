@@ -21,9 +21,9 @@
 
 /* Container */
 .ProductDetail__container {
-    width: 90%;
-    max-width: 1020px;
+    max-width: 1200px;
     margin: 48px 0;
+    width: 100%;
 }
 
 /* Header */
@@ -67,7 +67,8 @@
 
 .ProductDetail__content {
     flex: 2;
-    padding: 0 32px;
+    padding-left: 32px;
+    max-width: 540px;
 }
 
 /* ProductDetailGroup */
