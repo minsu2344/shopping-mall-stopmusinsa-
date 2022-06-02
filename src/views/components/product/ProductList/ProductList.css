@@ -1,3 +1,19 @@
+@media (max-width: 768px) {
+    .ProductCard__image {
+        width: 100%;
+    }
+
+    .ProductCard {
+        padding: 0;
+    }
+
+    .ProductCard:hover {
+        background-color: white;
+        transform: scale(1.02);
+        transition: all 0.5s;
+    }
+}
+
 /* ProductList */
 .ProductList__container {
     margin-top: 24px;

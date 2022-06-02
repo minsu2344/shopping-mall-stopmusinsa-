@@ -6,8 +6,8 @@ export default class ProductList extends HTMLElement {
     this.innerHTML = `
         <div class="ProductList">
             <div class="ProductList__container Site__container">
-                <h2 class="ProductList__title">제품 보기${title} </h2>
-                <div class="ProductList__products">
+                <h2 class="ProductList__title">제품 보기${title}</h2>
+                <div class="ProductList__products">    
                 </div>
             </div>
         </div>
@@ -20,11 +20,24 @@ export default class ProductList extends HTMLElement {
 
     // Product Card 동적으로 추가
     this.addProductCards();
-  }
-  async addProductCards() {
-    const data = await Api.get('/api/product');
-    console.log(data);
 
+    // Infinite Scroll
+    this.addInfiniteScroll();
+  }
+  async addProductCards(n) {
+    // const data = await Api.get('/api/product');
+    const products = this.createSampleProducts(20);
+    products.forEach((product) => {
+      this.addProductCard(product);
+    });
+  }
+  addProductCard(product) {
+    const productList = document.querySelector('.ProductList__products');
+    const productCard = document.createElement('product-card');
+    productCard.product = product;
+    productList.appendChild(productCard);
+  }
+  createSampleProducts(n) {
     // test code start
     const products = [];
     const sampleProduct = {
@@ -65,20 +78,81 @@ export default class ProductList extends HTMLElement {
       deliveryMethod: '입점사 배송', // 백엔드에 추가해야함
       detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg', // 백엔드에 추가해야함
     };
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < n; i++) {
       products.push(sampleProduct);
     }
+    return products;
     // test code end
-
-    products.forEach((product) => {
-      this.addProductCard(product);
-    });
   }
-  addProductCard(product) {
+  addInfiniteScroll() {
+    const observerCallback = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            this.addLoadingElements();
+          }, 300);
+          setTimeout(() => {
+            // 리스트에서 Spinner, Skeleton items  삭제
+            this.removeLoadingElements();
+            // API 호출 - 새 컨텐츠를 붙임
+            this.addProductCards(20);
+          }, 1000);
+        }
+      });
+    };
+    const observer = new IntersectionObserver(observerCallback, {threshold: 1});
+    const footer = document.querySelector('.Footer__contact');
+    observer.observe(footer);
+  }
+  addLoadingElements() {
+    // productCard 추가
+    this.addSkeletonCards();
+    this.addSpinner();
+  }
+  removeLoadingElements() {
+    // remove skeleton cards
     const productList = document.querySelector('.ProductList__products');
-    const productCard = document.createElement('product-card');
-    productCard.product = product;
-    productList.appendChild(productCard);
+    const skeletonCards = productList.getElementsByTagName('product-card-skeleton');
+    while (skeletonCards.length) {
+      productList.removeChild(skeletonCards[0]);
+    }
+    // remove spinner
+    const bottom = document.querySelector('.ProductList__container');
+    const spinner = document.getElementsByTagName('common-spinner')[0];
+    bottom.removeChild(spinner);
+  }
+  addSkeletonCards() {
+    const productList = document.querySelector('.ProductList__products');
+    for (let i = 0; i < 10; i++) {
+      const skeletonCard = document.createElement('product-card-skeleton');
+      productList.appendChild(skeletonCard);
+    }
+  }
+  addSpinner() {
+    // spinner 추가
+    const bottom = document.querySelector('.ProductList__container');
+    const spinner = document.createElement('common-spinner');
+    bottom.appendChild(spinner);
+  }
+  removeSkeletonCards() {
+    // remove skeleton cards
+    const productList = document.querySelector('.ProductList__products');
+    const skeletonCards = productList.getElementsByTagName('product-card-skeleton');
+    while (skeletonCards.length) {
+      productList.removeChild(skeletonCards[0]);
+    }
+  }
+  removeSpinner() {
+    // remove spinner
+    const bottom = document.querySelector('.ProductList__container');
+    const spinner = document.getElementsByTagName('common-spinner')[0];
+    bottom.removeChild(spinner);
+  }
+  observeLastItem(observer, items) {
+    const lastItem = items[items.length - 1];
+    if (lastItem) {
+      observer.observe(lastItem);
+    }
   }
 }
 window.customElements.define('product-list', ProductList);
