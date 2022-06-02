@@ -2,8 +2,10 @@ import cors from 'cors';
 import express from 'express';
 import {viewsRouter, apiRouter} from './routers';
 import {errorHandler} from './middlewares';
-
+import passport from 'passport';
 const app = express();
+import passsportRequired from './passport';
+passsportRequired();
 
 // CORS 에러 방지
 app.use(cors());
@@ -14,13 +16,17 @@ app.use(express.json());
 // Content-Type: application/x-www-form-urlencoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.urlencoded({extended: false}));
 
+// passport 초기화
+app.use(passport.initialize());
+
 // html, css, js 라우팅
 app.use(viewsRouter);
 
 
 // static file 경로 추가
-app.use('/assets', express.static(__dirname));
+app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/styles', express.static(__dirname + '/views/styles'));
+app.use('/components', express.static(__dirname + '/views/components'));
 // static files for components
 app.use('/src', express.static(__dirname));
 

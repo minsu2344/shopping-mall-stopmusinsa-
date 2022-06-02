@@ -3,19 +3,19 @@ export default class ProductDetail extends HTMLElement {
     super();
     // html 추가
     const product = {
-      brand: '캘빈클라인 골프',
-      category: '원피스',
       name: '[NF]링클워머 스워트 셋업',
       price: '98000',
-      point: '3169',
+      categories: '원피스',
       image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
+      brand: '캘빈클라인 골프',
+      sex: '여',
+      point: '3169',
+      options: [],
       modelNumber: '2021SS-02-KHO-2',
       season: '2021 S/S',
-      sex: '여',
       view: '56000',
       deliveryStart: '06.15',
       deliveryMethod: '국내배송/입점사 배송',
-      options: [],
       detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
     };
     this.innerHTML = `
@@ -133,24 +133,24 @@ export default class ProductDetail extends HTMLElement {
                         
                     </div>           
                      <div class="ProductDetailMobileContent__info">
-                        <p class="ProductDetailMobileContentInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailMobileContentInfo__body">최대 3,1690원</p>
+                        <p class="ProductDetailMobileContentInfo__title">브랜드 / 품번</h4>
+                        <p class="ProductDetailMobileContentInfo__body">${product.brand} /${product.modelNumber}</p>
                      </div>
                      <div class="ProductDetailMobileContent__info">
-                        <p class="ProductDetailMobileContentInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailMobileContentInfo__body">최대 3,1690원</p>
+                        <p class="ProductDetailMobileContentInfo__title">시즌 / 성별</h4>
+                        <p class="ProductDetailMobileContentInfo__body">${product.season} / ${product.sex}</p>
                      </div>
                      <div class="ProductDetailMobileContent__info">
-                        <p class="ProductDetailMobileContentInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailMobileContentInfo__body">최대 3,1690원</p>
+                        <p class="ProductDetailMobileContentInfo__title">조회수 (1개월)</h4>
+                        <p class="ProductDetailMobileContentInfo__body">${product.view}회 이상</p>
                      </div>
                      <div class="ProductDetailMobileContent__info">
-                        <p class="ProductDetailMobileContentInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailMobileContentInfo__body">최대 3,1690원</p>
+                        <p class="ProductDetailMobileContentInfo__title">출고정보</h4>
+                        <p class="ProductDetailMobileContentInfo__body">${product.deliveryStart}</p>
                      </div>
                      <div class="ProductDetailMobileContent__info">
-                        <p class="ProductDetailMobileContentInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailMobileContentInfo__body">최대 3,1690원</p>
+                        <p class="ProductDetailMobileContentInfo__title">배송방법</h4>
+                        <p class="ProductDetailMobileContentInfo__body">${product.deliveryMethod}</p>
                      </div>
                     </div>
                     <div class="ProductDetail__border"></div>
