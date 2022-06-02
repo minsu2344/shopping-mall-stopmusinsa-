@@ -61,7 +61,7 @@ h2 {
 }
 
 .name,
-.phone,
+.password,
 .email,
 .address {
   padding: 12px 16px;
@@ -73,14 +73,14 @@ h2 {
 }
 
 .name label,
-.phone label,
+.password label,
 .address label,
 .email label {
   font-weight: 600;
 }
 
 .name input,
-.phone input,
+.password input,
 .address input,
 .email input {
   border: var(--border-color) 1px solid;
@@ -104,7 +104,7 @@ h2 {
 }
 
 .name input:focus,
-.phone input:focus,
+.password input:focus,
 .address input:focus,
 .email input:focus {
   background-color: var(--focus-color);
