@@ -3,6 +3,7 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import {loginRequired, adminRequired} from '../middlewares';
 import {userService} from '../services';
+import passport from 'passport';
 
 const userRouter = Router();
 
@@ -38,7 +39,7 @@ userRouter.post('/register', async (req, res, next) => {
 });
 
 // 로그인 api (아래는 /login 이지만, 실제로는 /api/login로 요청해야 함.)
-userRouter.post('/login', async function(req, res, next) {
+userRouter.post('/login', passport.authenticate('local', {session: false}), async function(req, res, next) {
   try {
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
@@ -48,16 +49,26 @@ userRouter.post('/login', async function(req, res, next) {
     }
 
     // req (request) 에서 데이터 가져오기
-    const email = req.body.email;
-    const password = req.body.password;
+    const userId = req.user.userId;
+    const role = req.user.role;
 
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
-    const userToken = await userService.getUserToken({email, password});
+    const userToken = await userService.getUserToken({userId, role});
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
   } catch (error) {
     next(error);
+  }
+});
+// 사용자 정보 요청
+userRouter.get('/', loginRequired, async function(req, res, next) {
+  try {
+    const userId = req.user.userId;
+    const user = await userService.getUser(userId);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -82,7 +93,7 @@ userRouter.get(
 // 사용자 정보 수정
 // (예를 들어 /api/users/abc12345 로 요청하면 req.params.userId는 'abc12345' 문자열로 됨)
 userRouter.patch(
-    '/:userId',
+    '/',
     loginRequired,
     async function(req, res, next) {
       try {
@@ -95,7 +106,7 @@ userRouter.patch(
         }
 
         // params로부터 id를 가져옴
-        const userId = req.params.userId;
+        const userId = req.user.userId;
 
         // body data 로부터 업데이트할 사용자 정보를 추출함.
         const fullName = req.body.fullName;
@@ -137,5 +148,20 @@ userRouter.patch(
       }
     },
 );
+
+// 회원 탈퇴
+userRouter.delete('/', loginRequired, async (req, res, next) => {
+  try {
+    const userId = req.user.userId;
+
+    // 현재 로그인된 사용자 회원 탈퇴 진행
+    const deleteUserInfo = await userService.deleteUser(userId);
+
+    // 탈퇴 결과 프론트로 전달
+    res.status(200).json(deleteUserInfo);
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default userRouter;

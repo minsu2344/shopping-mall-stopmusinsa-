@@ -25,22 +25,27 @@ export default class CategoryEdit {
         const form = document.createElement('form');
         form.className = 'categoryUpdateForm';
         form.innerHTML = `
+          <div class='categoryUpdateForm__conatiner'>
             <h3>Main</h3>
-            <input  value='${category.item}'/>
+            <input name='main' value='${category.item}'/>
             <h3>Sub</h3>
-            <input value='${category.subItem}'/>
+            <input name='sub' value='${category.subItem}'/>
             <button name='update' type='submit'>수정하기</button>
             <button name='delete' type='submit'>삭제하기</button>
+          </div>
         `;
         this.content.appendChild(form);
 
         form.addEventListener('submit', async (e)=>{
           e.preventDefault();
+          const formData = new FormData(e.target);
           if (e.submitter.name === 'update') {
-            alert('준비중입니다ㅠㅠ');
+            if (formData.get('main') !== category.item) {
+              await Api.patch(`/api/category/main`, category.item, {newCategory: formData.get('main')});
+            }
+            await Api.patch(`/api/category/sub?categoryName=${category.item}&subCategoryName=${category.subItem}`, '', {newSubCategory: formData.get('sub')});
           } else if (e.submitter.name === 'delete') {
             await Api.delete(`/api/category/${category._id}`, '', {replaceCategoryIdArray: []});
-            location.reload();
           }
         });
       });
@@ -48,11 +53,14 @@ export default class CategoryEdit {
       this.content.appendChild(registerForm);
       registerForm.className = 'categoryUpdateForm';
       registerForm.innerHTML += `
-            <h3>Main</h3>
-            <input name='item'/>
-            <h3>Sub</h3>
-            <input name='subItem'/>
-            <button type='submit'>등록하기</button>
+        <div class='categoryUpdateForm__conatiner'>
+          <h3>Main</h3>
+          <input name='item'/>
+          <h3>Sub</h3>
+          <input name='subItem'/>
+          <button type='submit'>등록하기</button>
+          <div></div>
+        </div>
     `;
       registerForm.addEventListener('submit', async (e)=>{
         e.preventDefault();

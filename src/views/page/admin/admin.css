@@ -324,8 +324,10 @@ body {
 .EditContainer__content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+  border: 2px solid black;
+  border-bottom: none;
+  max-width: 800px;
 }
 
 .EditContainer__content__row {
@@ -335,10 +337,16 @@ body {
 
 .categoryUpdateForm {
   width: 100%;
+  height: 80px;
+  border-bottom: 2px solid black;
+  margin: 0;
+}
+
+.categoryUpdateForm__conatiner {
   display: flex;
-  padding: 20px;
+  height: 100%;
+  align-items: center;
   justify-content: space-around;
-  border: 2px solid silver;
 }
 
 .productRegisterForm {
@@ -361,19 +369,39 @@ body {
   flex-direction: column;
 }
 
+.productList__head {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  border: 2px solid black;
+}
+
 .productList {
   display: flex;
   flex-direction: column;
   height: 130px;
   border: 2px solid black;
-  margin:5px;
+  border-top: none;
 }
 
 .productList__desc {
-  flex:4;
+  flex: 4;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.productList__desc *,
+productList__head * {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productList__desc img {
+  width: 100px;
+  height: 80px;
 }
 
 .productList__btns {
@@ -381,6 +409,43 @@ body {
   display: flex;
   align-items: bottom;
 }
+
+.productList__btns button {
+  border-bottom: none;
+  border-left: none;
+}
+
+.orderContiner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderContents {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid black;
+  padding: 10px;
+}
+
+.orderContents * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+.orderContents ol {
+  display: inline;
+}
+
+.orderContents li {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 
 @media (max-width: 576px) {}
 

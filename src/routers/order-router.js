@@ -9,7 +9,7 @@ const orderRouter = Router();
 // 회원 주문 조회
 orderRouter.get('/member/orders', loginRequired, async (req, res, next) => {
   try {
-    const userId = req.currentUserId;
+    const userId = req.user.userId;
     const orderInfo = {
       userId: userId,
     };

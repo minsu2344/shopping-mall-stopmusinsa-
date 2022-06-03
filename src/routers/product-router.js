@@ -50,10 +50,11 @@ productRouter.get('/:productId', async (req, res, next) => {
 //  POST api/product (상품 등록)
 productRouter.post(
     '/',
-    upload.fields([{name: 'image'}, {name: 'description'}]),
+    loginRequired,
+    adminRequired,
+    upload.fields([{name: 'detailImage'}, {name: 'image'}]),
     async (req, res, next) => {
       try {
-        console.log(req.body)
         // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
         if (is.emptyObject(req.body)) {
           throw new Error(
@@ -67,10 +68,15 @@ productRouter.post(
           image,
           brand,
           sex,
-          description,
           colors,
           sizes,
           categories,
+          modelNumber,
+          season,
+          view,
+          deliveryStart,
+          deliveryMethod,
+          detailImage,
         } = req.body;
 
         const productInfo = {
@@ -79,8 +85,15 @@ productRouter.post(
           image,
           brand,
           sex,
-          description,
+          colors,
+          sizes,
           categories: {_id: categories},
+          modelNumber,
+          season,
+          view,
+          deliveryStart,
+          deliveryMethod,
+          detailImage,
         };
         // populate위한 전처리
         if (Array.isArray(colors)) {
@@ -109,9 +122,10 @@ productRouter.patch(
     '/:productId',
     loginRequired,
     adminRequired,
-    upload.fields([{name: 'image'}, {name: 'description'}]),
+    upload.fields([{name: 'detailImage'}, {name: 'image'}]),
     async (req, res, next) => {
       try {
+        const {productId} = req.params;
         // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
         if (is.emptyObject(req.body)) {
           throw new Error(
@@ -126,10 +140,15 @@ productRouter.patch(
           image,
           brand,
           sex,
-          description,
           colors,
           sizes,
           categories,
+          modelNumber,
+          season,
+          view,
+          deliveryStart,
+          deliveryMethod,
+          detailImage,
         } = req.body;
 
         const productInfo = {
@@ -138,8 +157,16 @@ productRouter.patch(
           image,
           brand,
           sex,
-          description,
+          colors,
+          sizes,
           categories: {_id: categories},
+          modelNumber,
+          season,
+          view,
+          deliveryStart,
+          deliveryMethod,
+          detailImage,
+
         };
         // populate위한 전처리
         if (Array.isArray(colors)) {

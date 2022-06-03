@@ -1,11 +1,12 @@
 export default class ProductList extends HTMLElement {
   constructor() {
     super();
+    const title = this.getAttribute('title') ? ' - ' + this.getAttribute('title') : '';
     // html 추가
     this.innerHTML = `
         <div class="ProductList">
             <div class="ProductList__container Site__container">
-                <h2 class="ProductList__title">실시간 랭킹</h2>
+                <h2 class="ProductList__title">실시간 랭킹${title} </h2>
                 <div class="ProductList__products">
                     <product-card></product-card>
                     <product-card></product-card>

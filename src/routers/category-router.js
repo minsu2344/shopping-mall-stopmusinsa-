@@ -120,6 +120,7 @@ categorytRouter.patch(
         const {newSubCategory} = req.body;
 
         const category = await categoryService.getCategoryByName(categoryName, subCategoryName);
+
         if (!category) {
           throw new Error('수정할 대상 카테고리가 없습니다.');
         }

@@ -20,7 +20,7 @@ export default class HeaderMobile extends HTMLElement {
                                 </div>
                             </div>
                             <div>
-                                <a href="/profile" class="HeaderMobileDefault__profile">
+                                <a href="/login" class="HeaderMobileDefault__profile">
                                     <img src="../../assets/images/profile.png" alt="profile" />
                                 </a>
                             </div>
@@ -54,7 +54,7 @@ export default class HeaderMobile extends HTMLElement {
                             </a>
                         </div>
                         <div class="HeaderMobileDetail__right">
-                            <a href="/profile" class="HeaderMobileDetail__link HeaderMobileDetail__profile">
+                            <a href="/login" class="HeaderMobileDetail__link HeaderMobileDetail__profile">
                                 <img class="HeaderMobileDetail__icon" src="../../assets/images/profile.png" alt="profile" />
                             </a>
                             <a href="/cart" class="HeaderMobileDetail__link HeaderMobileDetail__cart">

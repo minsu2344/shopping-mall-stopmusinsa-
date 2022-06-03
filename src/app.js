@@ -3,10 +3,14 @@ import express from 'express';
 import {viewsRouter, apiRouter} from './routers';
 import {errorHandler} from './middlewares';
 import bodyParser from 'body-parser';
+import passport from 'passport';
+import passsportRequired from './passport';
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}));
 
+passsportRequired();
+
+app.use(bodyParser.urlencoded({extended: false}));
 // parse application/json
 app.use(bodyParser.json());
 // CORS 에러 방지
@@ -16,6 +20,9 @@ app.use(express.json());
 
 // Content-Type: application/x-www-form-urlencoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.urlencoded({extended: false}));
+
+// passport 초기화
+app.use(passport.initialize());
 
 // html, css, js 라우팅
 app.use(viewsRouter);
