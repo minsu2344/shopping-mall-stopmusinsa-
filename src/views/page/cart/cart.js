@@ -285,6 +285,7 @@ totalPrice.addEventListener('click', handleOrderBtnClick);
 //   price,
 //   option,
 //   quantity: 1,
+//   checked: true,
 // }
 
 // products.push(data);
