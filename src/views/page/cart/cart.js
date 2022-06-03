@@ -11,12 +11,22 @@ const PRODUCTS_KEY = 'products';
 let sum = 0;
 
 
-let products = [{_id: 'djf20', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}, {_id: '12fd1', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}];
+let DEFAUTL_PRODUCTS = [{_id: 'djf20', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}, {_id: '12fd1', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}];
 
 
 // 로컬스토리지 저장
-function saveProducts() {
-  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(products));
+function saveProducts(newProducts) {
+  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(newProducts));
+}
+
+function getProductsData() {
+  const products = JSON.parse(localStorage.getItem(PRODUCTS_KEY));
+  if(Array.isArray(products)) {
+    return products;
+  }
+  else {
+    return DEFAUTL_PRODUCTS;
+  }
 }
 
 
@@ -28,7 +38,7 @@ function getProducts() {
   sum = 0;
 
 
-  const element = JSON.parse(localStorage.getItem(PRODUCTS_KEY)).map((value, i) => {
+  const element = getProductsData().map((value, i) => {
     const index = i + 1;
     const {image, name, option, price, quantity} = value;
     const result = price * quantity;
@@ -108,8 +118,7 @@ function handleDeleteAllBtnClick() {
   const result = confirm('장바구니를 비우시겠습니까?');
 
   if (result) {
-    products = [];
-    localStorage.removeItem(PRODUCTS_KEY);
+    saveProducts([]);
     productBox.innerHTML = '';
   }
 }
@@ -147,6 +156,7 @@ function deleteOne(target) {
   const result = confirm('장바구니에서 제거하시겠습니까?');
 
   if (result) {
+    const products = getProductsData();
     const product = target.parentElement.parentElement;
     const index = Number(product.firstElementChild.innerText);
     products.splice(index - 1, 1);
@@ -170,9 +180,10 @@ function changeValue(target) {
   }
 
   const index = Number(target.parentElement.parentElement.querySelector('#product-num').innerText);
+  const products = getProductsData();
   products[index - 1].quantity = quant;
 
-  saveProducts();
+  saveProducts(products);
   getProducts();
 }
 
@@ -181,13 +192,7 @@ function changeValue(target) {
 function handleCheck(checkbox) {
   // 개별 체크박스 선언
   const checkBoxes = document.querySelectorAll('.product-check');
-  let isChecked = true;
-  Array.from(checkBoxes).forEach((box) => {
-    if (box.checked === false) {
-      isChecked = false;
-      return;
-    }
-  });
+  let isChecked = Array.from(checkBoxes).every((box) => box.checked);
 
   if (isChecked) {
     checkAllBox.checked = true;
