@@ -7,6 +7,7 @@ import passport from 'passport';
 import passsportRequired from './passport';
 
 const app = express();
+passsportRequired();
 
 passsportRequired();
 

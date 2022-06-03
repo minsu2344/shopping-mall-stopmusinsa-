@@ -54,6 +54,7 @@ productRouter.post(
     adminRequired,
     upload.fields([{name: 'detailImage'}, {name: 'image'}]),
     async (req, res, next) => {
+      console.log(req.body);
       try {
         // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
         if (is.emptyObject(req.body)) {

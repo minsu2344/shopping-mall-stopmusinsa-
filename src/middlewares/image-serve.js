@@ -1,3 +1,4 @@
+import {body} from 'express-validator';
 import multer from 'multer';
 
 const storage = multer.diskStorage({
