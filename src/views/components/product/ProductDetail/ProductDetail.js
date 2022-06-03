@@ -1,7 +1,9 @@
+
+import * as Api from '../../../js/api.js';
 export default class ProductDetail extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
   // html 추가
-    const product = {
+    const sampleProduct = {
       ranking: 1,
       categories: {item: '하의', subitem: '슬랙스'},
       brand: '캘빈클라인 골프',
@@ -17,6 +19,7 @@ export default class ProductDetail extends HTMLElement {
       options: [],
       detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
     };
+    const product = await this.fetchProduct();
     this.innerHTML = `
        <div class="ProductDetail">
             <div class="ProductDetail__brandBar">
@@ -25,9 +28,9 @@ export default class ProductDetail extends HTMLElement {
             <div class="ProductDetail__container Site__container">
                 <div class="ProductDetail__header">
                     <div class="ProductDetailHeader__breadcrumb">
-                        <a>${product.categories.item}</a>
+                        <a>${product.categories ? product.categories.item : 'no category'}</a>
                         <span class="ProductDetailHeader__breadcrumbArrow"> &gt </span>
-                        <a>${product.categories.subitem}</a>
+                        <a>${product.categories ? product.categories.subitem : 'no category'}</a>
                     </div>
                     <p class="ProductDetailHeader__brand">${product.brand}</p>
                     <h2 class="ProductDetailHeader__title">${product.name}</h2>
@@ -35,11 +38,11 @@ export default class ProductDetail extends HTMLElement {
                     <div class="ProductDetailHeader__border"></div>
                     <div class="ProductDetailHeader__info">
                         <p class="ProductDetailHeaderInfo__title">게섯거라 판매가</h4>
-                        <p class="ProductDetailHeaderInfo__body">${product.price}원</p>
+                        <p class="ProductDetailHeaderInfo__body">${this.numberWithCommas(product.price)}원</p>
                     </div>
                     <div class="ProductDetailHeader__info">
                         <p class="ProductDetailHeaderInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailHeaderInfo__body">최대 ${product.point}원</p>
+                        <p class="ProductDetailHeaderInfo__body">최대 ${this.getPoint(product.price)}원</p>
                     </div>
                     <div class="ProductDetailHeader__textBoxes">
                         <div class="TextBox TextBox--red">게섯거라스토어는 전 상품 유료배송입니다.</div>
@@ -61,7 +64,7 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Product Info <span class="ProductDetailGroup__headerCaption">제품정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">브랜드/품번</h4>
-                                <p class="ProductDetailGroupItem__content">${product.brand} /${product.modelNumber}</p>
+                                <p class="ProductDetailGroupItem__content">${product.brand} / ${product.modelNumber}</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">시즌/성별</h4>
@@ -89,11 +92,11 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Price Info <span class="ProductDetailGroup__headerCaption">가격정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">게섯거라 판매가</h4>
-                                <p class="ProductDetailGroupItem__content">${product.price}원</p>
+                                <p class="ProductDetailGroupItem__content">${this.numberWithCommas(product.price)}원</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">게섯거라 적립금</h4>
-                                <p class="ProductDetailGroupItem__content">최대 ${product.point}원</p>
+                                <p class="ProductDetailGroupItem__content">최대 ${this.getPoint(product.price)}원</p>
                             </div>
                             <div class="ProductDetailGroup__textBoxes">
                                 <div class="TextBox TextBox--red">게섯거라스토어는 전 상품 유료배송입니다.</div>
@@ -187,5 +190,24 @@ export default class ProductDetail extends HTMLElement {
     linkElem.setAttribute('href', '/src/views/components/product/ProductDetail/ProductDetail.css');
     this.appendChild(linkElem);
   }
+  async fetchProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    this.product = await Api.get(`/api/product/${id}`);
+    console.log(id);
+    console.log(this.product);
+    return this.product;
+  }
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  getPoint(price) {
+    // 적립금 구하기
+    const percentage = 10;
+    const point = parseInt(price * percentage / 100); ;
+    return this.numberWithCommas(point);
+  }
 }
+
 window.customElements.define('product-detail', ProductDetail);

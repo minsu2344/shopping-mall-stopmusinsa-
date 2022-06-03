@@ -25,8 +25,10 @@ export default class ProductList extends HTMLElement {
     this.addInfiniteScroll();
   }
   async addProductCards(n) {
-    // const data = await Api.get('/api/product');
-    const products = this.createSampleProducts(20);
+    const data = await Api.get('/api/product');
+    console.log(data);
+    const products = data;
+    // const products = this.createSampleProducts(20);
     products.forEach((product) => {
       this.addProductCard(product);
     });

@@ -6,7 +6,7 @@ export default class ProductCard extends HTMLElement {
     // html 추가
     const product = this._product;
     this.innerHTML = `
-      <a href="/product?id=12345">
+      <a href="/product?id=${product._id}">
         <div class="ProductCard">
             <div class="ProductCard__header">
                 <div class="ProductCard__ranking">${product.ranking}위</div>
