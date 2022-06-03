@@ -148,3 +148,69 @@ h2 {
 #delete__btn:hover {
   background-color: rgb(237, 0, 0);
 }
+
+/* 주문 내역 */
+.order__history__box {
+  display: flex;
+  flex-direction: column;
+  margin: 100px 20px 70px;
+}
+
+.history__box {
+  border-right: none;
+}
+
+.history__title {
+  display: grid;
+  grid-template-columns: 4fr 1.5fr 1.5fr 1.5fr;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+.history__title div {
+  text-align: center;
+  font-weight: 700;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+}
+
+.history__product {
+  display: grid;
+  grid-template-columns: 4fr 1.5fr 1.5fr 1.5fr;
+  border-bottom: 2px solid var(--border-color);
+  text-align: center;
+  padding: 8px 0 8px;
+}
+
+.product__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product__name {
+  margin-left: 6px;
+}
+
+.history__status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order__status {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  border: black 1px solid;
+  border-radius: 2px;
+  height: 28px;
+  width: 80px;
+  transition: all 0.3s ease;
+}
+
+.order__status:hover {
+  background-color: black;
+  color: white;
+}
