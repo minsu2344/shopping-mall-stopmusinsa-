@@ -6,7 +6,11 @@ const Product = model('products', ProductSchema);
 export class ProductModel {
   // 상품 상세
   async findById(productId) {
-    const product = await Product.findOne({_id: productId});
+    const product = await Product.findOne({_id: productId})
+        .populate('colors.color')
+        .populate('sizes.size')
+        .populate('categories')
+        .lean();
     return product;
   }
   // 상품 추가
