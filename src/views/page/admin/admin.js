@@ -25,6 +25,16 @@ export default class Admin {
     }
   };
 }
-
+// const token = sessionStorage.getItem('token');
+// console.log(token);
+// if (!token) {
+//   alert('로그인이 필요합니다.');
+//   window.location.replace('/');
+// } else {
+//   if (JWTDecode(token).role !== 'admin') {
+//     alert('로그인이 필요합니다.');
+//     window.location.replace('/');
+//   }
+// }
 const main = document.querySelector('main');
 const admin = new Admin(main);
