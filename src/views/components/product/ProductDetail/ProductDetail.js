@@ -213,10 +213,12 @@ window.customElements.define('product-detail', ProductDetail);
 
 
 
-
+// 각 버튼 쿼리셀렉터로 선언
 const buyBtn = document.querySelector('.ProductDetailPayment__buyButton');
 const cartBtn = document.querySelector('ProductDetailPayment__cartButton');
 
+
+// 장바구니 버튼 클릭
 async function handleCartBtnClick() {
     const result = confirm('장바구니에 추가하시겠습니까?');
 
@@ -242,7 +244,9 @@ async function handleCartBtnClick() {
     }
 }
 
-async handleBuyBtnClick() {
+
+// 바로구매 버튼 클릭
+async function handleBuyBtnClick() {
     const result = confirm('상품을 구매하시겠습니까?');
 
     if(result) {
@@ -265,6 +269,6 @@ async handleBuyBtnClick() {
     }
 }
 
-
+//  각 버튼 클릭 이벤트
 cartBtn.addEventListener('click', handleCartBtnClick);
 buyBtn.addEventListener('click', handleBuyBtnClick);
