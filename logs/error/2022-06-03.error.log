@@ -5,3 +5,7 @@
 2022-06-03 21:36:10 error: Error: 회원을 찾을 수 없습니다.
     at Strategy._verify (/Users/doh/dohveloper/stop-musinsa/src/passport/strategies/local.js:15:13)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-06-03 22:12:39 error: Error: 해당 주문이 존재하지 않습니다. 다시 한 번 확인해 주세요.
+    at OrderService.setOrder (/Users/doh/dohveloper/stop-musinsa/src/services/order-service.js:53:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at /Users/doh/dohveloper/stop-musinsa/src/routers/order-router.js:98:27
