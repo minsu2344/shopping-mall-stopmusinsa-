@@ -3,7 +3,7 @@ export default class ProductList extends HTMLElement {
   constructor() {
     super();
     this.page = 1;
-    this.show = 1;
+    this.show = 30;
   }
   async connectedCallback() {
     const title = this.getAttribute('title') ? ' - ' + this.getAttribute('title') : '';
@@ -28,25 +28,23 @@ export default class ProductList extends HTMLElement {
     // Product Card 동적으로 추가
     const numberOfProducts = await this.addProductCards();
     // 충분한 제품수가 있을때만 무한스크롤
-    console.log(numberOfProducts);
     if (numberOfProducts > 20) {
       this.addInfiniteScroll();
     }
   }
   async addProductCards(n) {
     const requestUrl = `/api/product?page=${this.page}&show=${this.show}`;
-    console.log(this.show);
+    const products = await Api.get(requestUrl);
+    this.page++;
 
-    const data = await Api.get(requestUrl);
-    this.show++;
-
-    // test code
+    /* test code
     // const products = this.createSampleProducts(20);
+    const data = await Api.get(requestUrl);
     let products = [];
     for (let i = 0; i <= 20; i++) {
       products = products.concat(data);
     };
-
+    */
 
     products.forEach((product) => {
       this.addProductCard(product);
@@ -149,7 +147,7 @@ export default class ProductList extends HTMLElement {
   }
   addSkeletonCards() {
     const productList = document.querySelector('.ProductList__products');
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
       const skeletonCard = document.createElement('product-card-skeleton');
       productList.appendChild(skeletonCard);
     }
