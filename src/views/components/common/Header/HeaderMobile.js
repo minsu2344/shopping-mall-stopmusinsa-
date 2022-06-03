@@ -1,4 +1,5 @@
-import {JWTDecode} from '../../../js/useful-functions.js';
+import * as Api from '../../../js/api.js';
+
 export default class HeaderMobile extends HTMLElement {
   constructor() {
     super();
@@ -65,6 +66,7 @@ export default class HeaderMobile extends HTMLElement {
                 </div>
             </div>
     `;
+    this.markSelection();
     this.renderByType();
     this.renderByRole();
   }
@@ -78,17 +80,37 @@ export default class HeaderMobile extends HTMLElement {
       this.querySelector('.HeaderMobile__detail').style.display = 'none';
     }
   }
-  renderByRole() {
+  markSelection() {
+    // 선택 제거
+    const previousSelection = this.querySelector('.HeaderMobileDefaultNavItem__link--active');
+    previousSelection.classList.remove('HeaderMobileDefaultNavItem__link--active');
+
+    // href가 현재 url과 일치하면 현재 선택 추가
+    // HeaderMobileDefaultNavItem__link;
+    const urlPaths = document.URL.split('/');
+    const currentPath = '/' + urlPaths[3];
+    const links = this.querySelectorAll('.HeaderMobileDefaultNavItem__link');
+    links.forEach((link) => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('HeaderMobileDefaultNavItem__link--active');
+      }
+    });
+  }
+  async renderByRole() {
     const token = sessionStorage.getItem('token');
-    const {role} = JWTDecode(token);
     const nav = document.querySelector('.HeaderMobileDefaultNav__list');
 
-    if (role === 'admin') {
-      nav.innerHTML += `
+    // admin 계정에 대응해 admin navigation을 동적으로 생성
+    if (token) {
+      const user = await Api.get('/api/user');
+      console.log(user);
+      if (user.role === 'admin') {
+        nav.innerHTML += `
             <li class="HeaderMobileDefaultNavItem">
                 <a class="HeaderMobileDefaultNavItem__link" href="/admin">admin</a>
             </li>
         `;
+      }
     }
   }
 }

@@ -1,0 +1,54 @@
+2022-06-03 20:33:38 info: Server listening on port 3000
+2022-06-03 20:34:48 info: Server listening on port 3000
+2022-06-03 20:36:04 info: Server listening on port 3000
+2022-06-03 20:36:11 info: Server listening on port 3000
+2022-06-03 20:38:41 info: Server listening on port 3000
+2022-06-03 20:39:27 info: Server listening on port 3000
+2022-06-03 20:39:44 info: Server listening on port 3000
+2022-06-03 20:39:56 info: Server listening on port 3000
+2022-06-03 20:40:25 info: Server listening on port 3000
+2022-06-03 20:40:30 info: Server listening on port 3000
+2022-06-03 20:40:41 info: Server listening on port 3000
+2022-06-03 20:41:00 info: Server listening on port 3000
+2022-06-03 20:41:33 info: Server listening on port 3000
+2022-06-03 20:41:45 info: Server listening on port 3000
+2022-06-03 20:41:49 info: Server listening on port 3000
+2022-06-03 20:42:12 info: Server listening on port 3000
+2022-06-03 20:42:27 info: Server listening on port 3000
+2022-06-03 20:42:35 info: Server listening on port 3000
+2022-06-03 20:42:37 info: Server listening on port 3000
+2022-06-03 20:42:44 info: Server listening on port 3000
+2022-06-03 21:25:35 error: Error: 회원을 찾을 수 없습니다.
+    at Strategy._verify (/Users/doh/dohveloper/stop-musinsa/src/passport/strategies/local.js:15:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-06-03 21:36:10 error: Error: 회원을 찾을 수 없습니다.
+    at Strategy._verify (/Users/doh/dohveloper/stop-musinsa/src/passport/strategies/local.js:15:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-06-03 21:45:39 info: Server listening on port 3000
+2022-06-03 21:46:27 info: Server listening on port 3000
+2022-06-03 21:47:02 info: Server listening on port 3000
+2022-06-03 21:48:39 info: Server listening on port 3000
+2022-06-03 21:49:29 info: Server listening on port 3000
+2022-06-03 21:50:10 info: Server listening on port 3000
+2022-06-03 21:51:11 info: Server listening on port 3000
+2022-06-03 21:51:41 info: Server listening on port 3000
+2022-06-03 21:53:37 info: Server listening on port 3000
+2022-06-03 21:53:57 info: Server listening on port 3000
+2022-06-03 21:56:58 info: Server listening on port 3000
+2022-06-03 21:57:24 info: Server listening on port 3000
+2022-06-03 21:59:38 info: Server listening on port 3000
+2022-06-03 22:00:09 info: Server listening on port 3000
+2022-06-03 22:01:06 info: Server listening on port 3000
+2022-06-03 22:02:30 info: Server listening on port 3000
+2022-06-03 22:03:16 info: Server listening on port 3000
+2022-06-03 22:03:54 info: Server listening on port 3000
+2022-06-03 22:04:14 info: Server listening on port 3000
+2022-06-03 22:09:05 info: Server listening on port 3000
+2022-06-03 22:11:35 info: Server listening on port 3000
+2022-06-03 22:12:39 error: Error: 해당 주문이 존재하지 않습니다. 다시 한 번 확인해 주세요.
+    at OrderService.setOrder (/Users/doh/dohveloper/stop-musinsa/src/services/order-service.js:53:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at /Users/doh/dohveloper/stop-musinsa/src/routers/order-router.js:98:27
+2022-06-03 22:18:44 info: Server listening on port 3000
+2022-06-03 22:21:00 info: Server listening on port 3000

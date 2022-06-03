@@ -1,32 +1,30 @@
+
+import * as Api from '../../../js/api.js';
 export default class ProductDetail extends HTMLElement {
-  constructor() {
-    super();
-    // html 추가
-    const product = {
-      name: '[NF]링클워머 스워트 셋업',
-      price: '98000',
-      categories: '원피스',
-      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
-      brand: '캘빈클라인 골프',
-      sex: '여',
-      point: '3169',
-      options: [],
-      modelNumber: '2021SS-02-KHO-2',
-      season: '2021 S/S',
-      view: '56000',
-      deliveryStart: '06.15',
-      deliveryMethod: '국내배송/입점사 배송',
-      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
-    };
+  async connectedCallback() {
+    const product = await this.fetchProduct();
+
+    // colors
+    const colors = [];
+    product.colors.forEach((obj) => {
+      colors.push(obj.color.colorName);
+    });
+    // sizes
+    const sizes = [];
+    product.sizes.forEach((obj) => {
+      sizes.push(obj.size.sizeName);
+    });
     this.innerHTML = `
        <div class="ProductDetail">
             <div class="ProductDetail__brandBar">
                 <div class="Site__container">${product.brand}</div>
             </div>
-            <div class="ProductDetail__container">
+            <div class="ProductDetail__container Site__container">
                 <div class="ProductDetail__header">
                     <div class="ProductDetailHeader__breadcrumb">
-                        <a>${product.category}</a>
+                        <a>${product.categories ? product.categories.item : 'no category'}</a>
+                        <span class="ProductDetailHeader__breadcrumbArrow"> &gt </span>
+                        <a>${product.categories ? product.categories.subItem : 'no category'}</a>
                     </div>
                     <p class="ProductDetailHeader__brand">${product.brand}</p>
                     <h2 class="ProductDetailHeader__title">${product.name}</h2>
@@ -34,11 +32,11 @@ export default class ProductDetail extends HTMLElement {
                     <div class="ProductDetailHeader__border"></div>
                     <div class="ProductDetailHeader__info">
                         <p class="ProductDetailHeaderInfo__title">게섯거라 판매가</h4>
-                        <p class="ProductDetailHeaderInfo__body">${product.price}원</p>
+                        <p class="ProductDetailHeaderInfo__body">${this.numberWithCommas(product.price)}원</p>
                     </div>
                     <div class="ProductDetailHeader__info">
                         <p class="ProductDetailHeaderInfo__title">게섯거라 적립금</h4>
-                        <p class="ProductDetailHeaderInfo__body">최대 ${product.point}원</p>
+                        <p class="ProductDetailHeaderInfo__body">최대 ${this.getPoint(product.price)}원</p>
                     </div>
                     <div class="ProductDetailHeader__textBoxes">
                         <div class="TextBox TextBox--red">게섯거라스토어는 전 상품 유료배송입니다.</div>
@@ -60,7 +58,7 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Product Info <span class="ProductDetailGroup__headerCaption">제품정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">브랜드/품번</h4>
-                                <p class="ProductDetailGroupItem__content">${product.brand} /${product.modelNumber}</p>
+                                <p class="ProductDetailGroupItem__content">${product.brand} / ${product.modelNumber}</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">시즌/성별</h4>
@@ -88,11 +86,11 @@ export default class ProductDetail extends HTMLElement {
                             <h3 class="ProductDetailGroup__header">Price Info <span class="ProductDetailGroup__headerCaption">가격정보</span></h3>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">게섯거라 판매가</h4>
-                                <p class="ProductDetailGroupItem__content">${product.price}원</p>
+                                <p class="ProductDetailGroupItem__content">${this.numberWithCommas(product.price)}원</p>
                             </div>
                             <div class="ProductDetailGroupItem">
                                 <h4 class="ProductDetailGroupItem__title">게섯거라 적립금</h4>
-                                <p class="ProductDetailGroupItem__content">최대 ${product.point}원</p>
+                                <p class="ProductDetailGroupItem__content">최대 ${this.getPoint(product.price)}원</p>
                             </div>
                             <div class="ProductDetailGroup__textBoxes">
                                 <div class="TextBox TextBox--red">게섯거라스토어는 전 상품 유료배송입니다.</div>
@@ -101,24 +99,16 @@ export default class ProductDetail extends HTMLElement {
                             <div class="ProductDetailGroup__border"></div>
                         </div>
                         <div class="ProductDetailOption__container">
-                            <div class="ProductDetailOption">
-                                <select class="ProductDetailOption__list">
-                                    <option class="ProductDetailOption__item" value="0">옵션 선택</option>
-                                    <option class="ProductDetailOption__item" value="1">Audi</option>
-                                    <option class="ProductDetailOption__item" value="2">BMW</option>
-                                    <option class="ProductDetailOption__item" value="3">Citroen</option>
-                                    <option class="ProductDetailOption__item" value="4">Ford</option>
-                                    <option class="ProductDetailOption__item" value="5">Honda</option>
-                                    <option class="ProductDetailOption__item" value="6">Jaguar</option>
-                                </select>
-                            </div>
+                           ${this.createOptionBox('색상', colors)}
+                           ${this.createOptionBox('사이즈', sizes)}
+                              
                             <div class="ProductDetailOption__price">
                                 <p>총 상품 금액</p>
-                                <p>0원</p>
+                                <p>${this.numberWithCommas(product.price)}원</p>
                             </div>
                         </div>
                         <div class="ProductDetailPayment">
-                            <button class="ProductDetailPayment__buyButton">바로구매</button>
+                            <button onclick="location.href='/pay'" class="ProductDetailPayment__buyButton">바로구매</button>
                             <button class="ProductDetailPayment__cartButton">
                                 <img src="../../assets/images/shopping_bag.png" alt="shopping_bag" />
                             </button>
@@ -175,5 +165,41 @@ export default class ProductDetail extends HTMLElement {
     linkElem.setAttribute('href', '/src/views/components/product/ProductDetail/ProductDetail.css');
     this.appendChild(linkElem);
   }
+  async fetchProduct() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    this.product = await Api.get(`/api/product/${id}`);
+    return this.product;
+  }
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  getPoint(price) {
+    // 적립금 구하기
+    const percentage = 10;
+    const point = parseInt(price * percentage / 100); ;
+    return this.numberWithCommas(point);
+  }
+  createOption(option) {
+    return `<option class="ProductDetailOption__item" value="${option}">${option}</option>`;
+  }
+  createOptionBox(title, options) {
+    let optionPart = '';
+    console.log(options);
+    options.forEach((option) => {
+      optionPart += this.createOption(option);
+    });
+
+    const optionBox = `<div class="ProductDetailOption">
+                <select class="ProductDetailOption__list">
+        <option class="ProductDetailOption__item" value="">${title}</option>        
+               ${optionPart}
+                </select>
+            </div>`;
+
+    return optionBox;
+  }
 }
+
 window.customElements.define('product-detail', ProductDetail);

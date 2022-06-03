@@ -1,4 +1,4 @@
-import {JWTDecode} from '../../../js/useful-functions.js';
+import * as Api from '../../../js/api.js';
 
 export default class HeaderPC extends HTMLElement {
   constructor() {
@@ -21,6 +21,7 @@ export default class HeaderPC extends HTMLElement {
                                         <a class="HeaderMainNavItem__link HeaderMainNavItem__link--active" href="/">홈</a>
                                         <div class="HeaderMainNavItem__underbar"></div>
                                     </li>
+                                    <!--
                                     <li class="HeaderMainNavItem">
                                         <a class="HeaderMainNavItem__link" href="/tops">상의</a>
                                     </li>
@@ -29,6 +30,16 @@ export default class HeaderPC extends HTMLElement {
                                     </li>
                                     <li class="HeaderMainNavItem">
                                         <a class="HeaderMainNavItem__link" href="/outwears">아우터</a>
+                                    </li>
+                                    -->
+                                     <li class="HeaderMainNavItem">
+                                        <a class="HeaderMainNavItem__link" href="/login">로그인</a>
+                                    </li>
+                                    <li class="HeaderMainNavItem">
+                                        <a class="HeaderMainNavItem__link" href="/register">회원가입</a>
+                                    </li>
+                                    <li class="HeaderMainNavItem">
+                                        <a class="HeaderMainNavItem__link" href="/cart">장바구니</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -62,9 +73,8 @@ export default class HeaderPC extends HTMLElement {
     this.renderByRole();
   }
 
-  renderByRole() {
+  async renderByRole() {
     const token = sessionStorage.getItem('token');
-    const {role} = JWTDecode(token);
     const nav = document.querySelector('.HeaderMainNav__list');
     const member = document.querySelectorAll('.HeaderMember__container', '.Site__container')[0];
     // 로그인 되어있을 시 로그아웃버튼
@@ -74,19 +84,22 @@ export default class HeaderPC extends HTMLElement {
             <button class="Button Button--outline">로그아웃</button>
         </a>
         <div class="HeaderMemberMenus">환영합니다!</div>`;
-    }
-    member.firstElementChild.addEventListener('click', ()=>{
-      sessionStorage.removeItem('token');
-      window.location.replace('/');
-    });
 
-    // admin 계정
-    if (role === 'admin') {
-      nav.innerHTML += `
+      member.firstElementChild.addEventListener('click', ()=>{
+        sessionStorage.removeItem('token');
+        window.location.replace('/');
+      });
+
+      const user = await Api.get('/api/user');
+      console.log(user);
+      // admin 계정
+      if (user.role === 'admin') {
+        nav.innerHTML += `
             <li class="HeaderMainNavItem">
                 <a class="HeaderMainNavItem__link" href="/admin">admin</a>
             </li>
         `;
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
 
 .ProductCard {
     font-size: 12px;
-    padding: 8px;
+    border-radius: 8px;
 }
 
 .ProductCard:hover {
@@ -15,6 +15,7 @@
 }
 
 .ProductCard__header {
+    display: none;
 }
 
 .ProductCard__ranking {
@@ -29,11 +30,13 @@
 }
 
 .ProductCard__image {
-    width: 72%;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 200px;
 }
 
 .ProductCard__body {
-    margin-top: 16px;
+    padding: 16px 8px;
 }
 
 .ProductCard__brand {
@@ -43,6 +46,7 @@
 
 .ProductCard__price {
     font-weight: 700;
+    margin-bottom: 0;
 }
 
 @media (max-width: 768px) {

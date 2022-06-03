@@ -33,6 +33,8 @@ app.use(viewsRouter);
 app.use('/assets', express.static(__dirname + '/views/assets'));
 app.use('/styles', express.static(__dirname + '/views/styles'));
 app.use('/components', express.static(__dirname + '/views/components'));
+app.use('/js', express.static(__dirname + '/views/js'));
+app.use('/uploads', express.static(__dirname + '/views/uploads'));
 // static files for components
 app.use('/src', express.static(__dirname));
 
