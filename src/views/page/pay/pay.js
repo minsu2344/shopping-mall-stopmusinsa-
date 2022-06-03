@@ -94,7 +94,7 @@ function priceSum() {
     return product.quantity * product.price;
   }).reduce((acc, cur) => acc + cur);
 
-  submitBtn.value = `${priceResult.toLocaleString()}원 결제`;
+  submitBtn.value = priceResult !== 0 ? `${priceResult.toLocaleString()}원 결제`: `상품이 없습니다.`;
 }
 
 form.addEventListener('submit', handleFormSubmit);
