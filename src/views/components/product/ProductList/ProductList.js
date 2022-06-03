@@ -1,5 +1,10 @@
 import * as Api from '../../../js/api.js';
 export default class ProductList extends HTMLElement {
+  constructor() {
+    super();
+    this.page = 1;
+    this.show = 1;
+  }
   async connectedCallback() {
     const title = this.getAttribute('title') ? ' - ' + this.getAttribute('title') : '';
     // html 추가
@@ -29,13 +34,16 @@ export default class ProductList extends HTMLElement {
     }
   }
   async addProductCards(n) {
-    const data = await Api.get('/api/product');
-    console.log(data);
+    const requestUrl = `/api/product?page=${this.page}&show=${this.show}`;
+    console.log(this.show);
+
+    const data = await Api.get(requestUrl);
+    this.show++;
 
     // test code
     // const products = this.createSampleProducts(20);
     let products = [];
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i <= 20; i++) {
       products = products.concat(data);
     };
 
