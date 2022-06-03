@@ -19,6 +19,7 @@ export default class HeaderPC extends HTMLElement {
                                         <a class="HeaderMainNavItem__link HeaderMainNavItem__link--active" href="/">홈</a>
                                         <div class="HeaderMainNavItem__underbar"></div>
                                     </li>
+                                    <!--
                                     <li class="HeaderMainNavItem">
                                         <a class="HeaderMainNavItem__link" href="/tops">상의</a>
                                     </li>
@@ -27,6 +28,16 @@ export default class HeaderPC extends HTMLElement {
                                     </li>
                                     <li class="HeaderMainNavItem">
                                         <a class="HeaderMainNavItem__link" href="/outwears">아우터</a>
+                                    </li>
+                                    -->
+                                     <li class="HeaderMainNavItem">
+                                        <a class="HeaderMainNavItem__link" href="/login">로그인</a>
+                                    </li>
+                                    <li class="HeaderMainNavItem">
+                                        <a class="HeaderMainNavItem__link" href="/register">회원가입</a>
+                                    </li>
+                                    <li class="HeaderMainNavItem">
+                                        <a class="HeaderMainNavItem__link" href="/cart">장바구니</a>
                                     </li>
                                 </ul>
                             </nav>
