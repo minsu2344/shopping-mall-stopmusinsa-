@@ -21,6 +21,7 @@ export default class OrderEdit {
     `;
     this.render();
   }
+
   async render() {
     this.title.innerText = `주문 목록`;
     const orderList = await Api.get('/api/order/orders');
@@ -29,6 +30,7 @@ export default class OrderEdit {
     });
   }
 
+  // 주문 목록별 블록 생성
   async orderli(data, target) {
     const container = document.createElement('div');
     container.className = 'orderContents';
@@ -62,6 +64,7 @@ export default class OrderEdit {
       <option value='배송중' ${data.state === '배송중' ? 'selected' : ''}>배송중</option>
       <option value='배송완료' ${data.state === '배송완료' ? 'selected' : ''}>배송완료</option>
     `;
+      // 주문 상태 변경
       selectState.addEventListener('change', async (e)=>{
         await Api.patch(`/api/order/orders`, data._id + '/' + e.target.value);
       });
