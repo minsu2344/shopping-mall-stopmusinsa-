@@ -21,21 +21,6 @@ body {
   color: #6e6e6e;
 }
 
-/*Button*/
-.Button {
-  --background-color: black;
-  --text-color: white;
-  box-sizing: content-box;
-  padding: 8px 48px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 12px;
-  line-height: 12px;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  text-align: center;
-}
-
 .Button--secondary {
   border: 1px solid #000;
   background-color: white;

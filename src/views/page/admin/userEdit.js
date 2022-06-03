@@ -35,7 +35,7 @@ export default class UserEdit {
     container.className = 'orderContents';
     container.innerHTML = `
       <h3>${data.role}</h3>
-      <h3>${data.fullname}</h3>
+      <h3>${data.fullName}</h3>
       <h3>${data.email}</h3>
       <div>
           <ol>
