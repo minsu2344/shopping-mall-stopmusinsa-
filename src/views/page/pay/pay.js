@@ -28,8 +28,7 @@ async function handleFormSubmit(e) {
     const productData = {
       product: {
         _id,
-        count,
-      },
+      }, count,
     };
 
     productArr.push(productData);
@@ -93,7 +92,7 @@ function priceSum() {
   const productArray = JSON.parse(localStorage.getItem('products'));
   const priceResult = productArray.map((product) => {
     return product.quantity * product.price;
-  }).reduce((acc, cur) => acc+cur);
+  }).reduce((acc, cur) => acc + cur);
 
   submitBtn.value = `${priceResult.toLocaleString()}원 결제`;
 }
@@ -102,26 +101,3 @@ form.addEventListener('submit', handleFormSubmit);
 
 getProducts();
 priceSum();
-
-
-// payFinish HTML 함수
-function realFinish() {
-  location.replace('/');
-  const products = [];
-  localStorage.setItem('products', products);
-}
-
-async function cancleOrder() {
-  const result = confirm('주문을 취소하시겠습니까?');
-
-  try {
-    if (result) {
-      await Api.patch('localhost:5000/api/order/o/:', data);
-      alert('주문이 취소되었습니다.');
-      location.replace('/');
-    }
-  } catch (err) {
-    console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  }
-}
