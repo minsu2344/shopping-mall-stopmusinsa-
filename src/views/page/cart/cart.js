@@ -161,7 +161,7 @@ function handleOrderBtnClick() {
   const filtered = products.filter(product => {
     return product.checked === true;
   });
-  location.href = '/pay';
+  location.replace('/pay');
 }
 
 

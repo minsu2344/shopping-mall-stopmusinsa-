@@ -52,7 +52,7 @@ async function handleFormSubmit(e) {
 
     await Api.post('/api/order/', data);
 
-    location.href = '/payComplete';
+    location.replace('/payComplete');
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
@@ -106,7 +106,7 @@ priceSum();
 
 // payFinish HTML 함수
 function realFinish() {
-  location.href = '/';
+  location.replace('/');
   const products = [];
   localStorage.setItem('products', products);
 }
@@ -118,7 +118,7 @@ async function cancleOrder() {
     if (result) {
       await Api.patch('localhost:5000/api/order/o/:', data);
       alert('주문이 취소되었습니다.');
-      location.href = '/';
+      location.replace('/');
     }
   } catch (err) {
     console.error(err.stack);
