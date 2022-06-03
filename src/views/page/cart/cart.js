@@ -29,10 +29,8 @@ function getProductsData() {
 // 로컬 스토리지 받기
 function getProducts() {
   setProductNum();
-  if (productBox.innerHTML !== '') productBox.innerHTML = '';
 
   sum = 0;
-
 
   const element = getProductsData().map((value, i) => {
     const index = i + 1;
@@ -43,8 +41,8 @@ function getProducts() {
     
     return paintProductBox(index, image, name, option, price, quantity, result);
   });
-  emptyCart(sum);
   productBox.innerHTML = element.join('\n');
+  emptyCart(sum);
 }
 
 // 장바구니 비었을 때 함수
@@ -112,10 +110,11 @@ function setProductNum() {
 
 // 전체삭제 버튼 클릭 함수
 function handleDeleteAllBtnClick() {
-  if (localStorage.products.length === 0) {
+  if (JSON.parse(localStorage.getItem(PRODUCTS_KEY)).length === 0) {
     alert('장바구니가 비어있습니다.');
     return;
   }
+
   const result = confirm('장바구니를 비우시겠습니까?');
 
   if (result) {
@@ -129,18 +128,26 @@ function handleDeleteAllBtnClick() {
 function handleCheckAllClick(e) {
   const checkBoxes = document.querySelectorAll('.product-check');
   const products = getProductsData();
-  console.log(checkAllBox);
-  checkAllBox.checked === true ?
-  products.forEach(product => product.checked = true) :
-  products.forEach(product => product.checked = false);
+  let total = 0;
+  products.forEach(product => {
+    total += product.quantity * product.price;
+  });
+
+  if(checkAllBox.checked === true) {
+    products.forEach(product => product.checked = true);
+  }
+  else {
+    products.forEach(product => product.checked = false);
+    total = 0;
+  }
+
+  emptyCart(total);
   
   Array.from(checkBoxes).forEach((x) => {
     x.checked = e.target.checked;
-    // console.dir(x);
   });
 
   saveProducts(products);
-  getProducts();
 }
 
 
@@ -211,6 +218,7 @@ function changeValue(target) {
 
   saveProducts(products);
   getProducts();
+
 }
 
 
@@ -222,6 +230,9 @@ function handleCheck(checkbox) {
 
   if (isChecked) {
     checkAllBox.checked = true;
+  }
+  else {
+    checkAllBox.checked = false;
   }
 
   const value = checkbox.checked;
@@ -245,11 +256,7 @@ function handleCheck(checkbox) {
     saveProducts(products);
   }
 
-  if (sum !== 0) {
-    totalPrice.value = `총 ${sum.toLocaleString()}원 주문하기`;
-  } else {
-    totalPrice.value = `장바구니가 비었습니다.`;
-  }
+  emptyCart(sum);
 }
 
 
