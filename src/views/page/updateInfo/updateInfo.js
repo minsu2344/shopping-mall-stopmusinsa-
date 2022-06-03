@@ -1,11 +1,12 @@
 import * as Api from '/api.js';
 
 const username = document.querySelector('#name');
-const newPassword = document.querySelector('#password');
+const curPassword = document.querySelector('#password');
 const email = document.querySelector('#email');
-const postCdoe = document.querySelector('#sample6_postcode');
+const postCode = document.querySelector('#sample6_postcode');
 const address = document.querySelector('#sample6_address');
 const detailAdd = document.querySelector('#sample6_detailAddress');
+const newPassword = document.querySelector('#new__password');
 const form = document.querySelector('form');
 const deleteBtn = document.querySelector('#delete__btn');
 
@@ -13,10 +14,12 @@ const deleteBtn = document.querySelector('#delete__btn');
 async function handleFormSubmit(e) {
   e.preventDefault();
 
+  const user = await Api.get('/api/user');
+
   const fullName = username.value;
-  const currentPassword = ;
-  const password = newPassword.value;
-  const postalCode = postCdoe.value;
+  const currentPassword = curPassword.value;
+  const password = newPassword.value.length > 0 ? newPassword.value : curPassword.value;
+  const postalCode = postCode.value;
   const address1 = address.value;
   const address2 = detailAdd.value;
 
@@ -29,10 +32,10 @@ async function handleFormSubmit(e) {
         postalCode,
         address1,
         address2,
-      }
+      },
     };
 
-    await Api.patch('localhost:5000/api/user', userId, data);
+    await Api.patch('localhost:5000/api/user', '', data);
   }
   catch(err) {
     console.error(err.stack);
@@ -42,7 +45,14 @@ async function handleFormSubmit(e) {
 
 // 기존 회원 정보 넣기
 async function paintUserInfo() {
-  const user = await Api.get();
+  const user = await Api.get('/api/user');
+  console.log(user);
+
+  username.value = user.fullName;
+  email.value = user.email;
+  postCode.value = user.address.postalCode;
+  address.value = user.address.address1;
+  detailAdd.value = user.address.address2;
 }
 
 // 회원탈퇴 버튼 클릭 함수
@@ -73,3 +83,5 @@ form.addEventListener('submit', handleFormSubmit);
 
 // 회원 탈퇴 버튼 클릭 이벤트
 deleteBtn.addEventListener('click', handleDeleteBtnClick);
+
+paintUserInfo();
