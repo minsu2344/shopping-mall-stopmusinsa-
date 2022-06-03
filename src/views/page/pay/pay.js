@@ -1,11 +1,10 @@
-import * as Api from '../../js/api';
+import * as Api from '../../js/api.js';
 
 const userName = document.querySelector('#name');
 const phone = document.querySelector('#phone');
-const postCode = document.querySelector('#sample4_postcode');
-const roadAddress = document.querySelector('#sample4_roadAddress');
-// const jibunAddress = document.querySelector('#sample4_jibunAddress');
-const detailAddress = document.querySelector('#sample4_detailAddress');
+const postCode = document.querySelector('#sample6_postcode');
+const roadAddress = document.querySelector('#sample6_address');
+const detailAddress = document.querySelector('#sample6_detailAddress');
 const payment = document.getElementsByName('payment');
 const form = document.querySelector('form');
 const productsMain = document.querySelector('.products__main');
@@ -51,12 +50,9 @@ async function handleFormSubmit(e) {
       paymentMethod,
     };
 
-    await Api.post('localhost:5000/api/order/', data);
+    await Api.post('/api/order/', data);
 
-    const products = [];
-    localStorage.setItem('products', products);
-
-    location.href = '/payFinish';
+    location.href = '/payComplete';
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
@@ -66,10 +62,10 @@ async function handleFormSubmit(e) {
 function getProducts() {
   const element = JSON.parse(localStorage.getItem('products')).map((value) => {
     const {name, image, option, quantity, price} = value;
-    
+
     return paintProducts(name, image, option, quantity, price);
   });
-  
+
   productsMain.innerHTML = element.join('\n');
 }
 
@@ -94,8 +90,10 @@ function paintProducts(name, image, option, qunatity, price) {
 }
 
 function priceSum() {
-  const priceArray = document.querySelectorAll('.price');
-  const priceResult = Array.from(priceArray).map((price) => Number(price.innerText.replace(/,/g, ''))).reduce((acc, cur) => acc + cur);
+  const productArray = JSON.parse(localStorage.getItem('products'));
+  const priceResult = productArray.map((product) => {
+    return product.quantity * product.price;
+  }).reduce((acc, cur) => acc+cur);
 
   submitBtn.value = `${priceResult.toLocaleString()}원 결제`;
 }
@@ -106,25 +104,23 @@ getProducts();
 priceSum();
 
 
-
-
 // payFinish HTML 함수
 function realFinish() {
   location.href = '/';
+  const products = [];
+  localStorage.setItem('products', products);
 }
 
 async function cancleOrder() {
   const result = confirm('주문을 취소하시겠습니까?');
-  
+
   try {
-    if(result) {
-      const data = {status: }
+    if (result) {
       await Api.patch('localhost:5000/api/order/o/:', data);
       alert('주문이 취소되었습니다.');
       location.href = '/';
     }
-  }
-  catch(err) {
+  } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
