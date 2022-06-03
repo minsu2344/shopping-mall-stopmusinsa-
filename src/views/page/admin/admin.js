@@ -34,7 +34,7 @@ if (!token) {
 } else {
   const user = await Api.get('/api/user');
   if (user.role !== 'admin') {
-    alert('로그인이 필요합니다.');
+    alert('admin 계정이 필요합니다.');
     window.location.replace('/');
   }
 }
