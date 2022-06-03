@@ -2,27 +2,6 @@
 import * as Api from '../../../js/api.js';
 export default class ProductDetail extends HTMLElement {
   async connectedCallback() {
-  // html 추가
-    const sampleProduct = {
-      ranking: 1,
-      categories: {item: '하의', subitem: '슬랙스'},
-      brand: '캘빈클라인 골프',
-      name: '[NF]링클워머 스워트 셋업',
-      price: '98000',
-      image: 'https://image.msscdn.net/images/goods_img/20210609/1989228/1989228_4_500.jpg?t=20210705115809',
-      modelNumber: '2021SS-02-KHO-2',
-      season: '2021 S/S',
-      sex: '여',
-      view: '56000',
-      deliveryStart: '06.15',
-      deliveryMethod: '국내배송/입점사 배송',
-      options: [],
-      detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
-    };
-
-    // testcode
-    const testcolors = ['green', 'red'];
-    const testsizes = ['M', 'L'];
     const product = await this.fetchProduct();
 
     // colors

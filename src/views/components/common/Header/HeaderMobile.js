@@ -1,3 +1,5 @@
+import * as Api from '../../../js/api.js';
+
 export default class HeaderMobile extends HTMLElement {
   constructor() {
     super();
@@ -66,6 +68,7 @@ export default class HeaderMobile extends HTMLElement {
     `;
     this.markSelection();
     this.renderByType();
+    this.renderByRole();
   }
   renderByType() {
     const type = this.getAttribute('type');
@@ -92,6 +95,22 @@ export default class HeaderMobile extends HTMLElement {
         link.classList.add('HeaderMobileDefaultNavItem__link--active');
       }
     });
+  }
+  async renderByRole() {
+    const token = sessionStorage.getItem('token');
+    const nav = document.querySelector('.HeaderMobileDefaultNav__list');
+
+    if (token) {
+      const user = await Api.get('/api/user');
+      console.log(user);
+      if (user.role === 'admin') {
+        nav.innerHTML += `
+            <li class="HeaderMobileDefaultNavItem">
+                <a class="HeaderMobileDefaultNavItem__link" href="/admin">admin</a>
+            </li>
+        `;
+      }
+    }
   }
 }
 window.customElements.define('common-header-mobile', HeaderMobile);

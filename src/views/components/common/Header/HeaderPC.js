@@ -1,3 +1,5 @@
+import * as Api from '../../../js/api.js';
+
 export default class HeaderPC extends HTMLElement {
   constructor() {
     super();
@@ -49,7 +51,9 @@ export default class HeaderPC extends HTMLElement {
                 </div>
                 <div class="Header__member">
                     <div class="HeaderMember__container Site__container">
-                        <a href="/login" class="Button Button--outline">로그인</a>
+                        <a class="HeaderMemberButton__link" href="/login">
+                            <button class="Button Button--outline">로그인</button>
+                        </a>
                         <div class="HeaderMemberMenus">
                             <div class="HeaderMemberMenu">
                                 <a class="HeaderMemberMenu__link" href="/register">회원가입</a>
@@ -66,6 +70,37 @@ export default class HeaderPC extends HTMLElement {
                 </div>
             </div>
     `;
+    this.renderByRole();
+  }
+
+  async renderByRole() {
+    const token = sessionStorage.getItem('token');
+    const nav = document.querySelector('.HeaderMainNav__list');
+    const member = document.querySelectorAll('.HeaderMember__container', '.Site__container')[0];
+    // 로그인 되어있을 시 로그아웃버튼
+    if (token) {
+      member.innerHTML = `
+        <a class="HeaderMemberButton__link">
+            <button class="Button Button--outline">로그아웃</button>
+        </a>
+        <div class="HeaderMemberMenus">환영합니다!</div>`;
+
+      member.firstElementChild.addEventListener('click', ()=>{
+        sessionStorage.removeItem('token');
+        window.location.replace('/');
+      });
+
+      const user = await Api.get('/api/user');
+      console.log(user);
+      // admin 계정
+      if (user.role === 'admin') {
+        nav.innerHTML += `
+            <li class="HeaderMainNavItem">
+                <a class="HeaderMainNavItem__link" href="/admin">admin</a>
+            </li>
+        `;
+      }
+    }
   }
 }
 window.customElements.define('common-header-pc', HeaderPC);

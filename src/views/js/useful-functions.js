@@ -27,3 +27,4 @@ export const convertToNumber = (string) => {
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
