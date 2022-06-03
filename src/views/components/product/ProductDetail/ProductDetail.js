@@ -19,7 +19,23 @@ export default class ProductDetail extends HTMLElement {
       options: [],
       detailImage: 'https://image.musinsa.com/images/prd_img/2022052514500100000046988.jpg',
     };
+
+    // testcode
+    const testcolors = ['green', 'red'];
+    const testsizes = ['M', 'L'];
     const product = await this.fetchProduct();
+
+    // colors
+    const colors = [];
+    product.colors.forEach((obj) => {
+      colors.push(obj.color);
+    });
+    // sizes
+    const sizes = [];
+    product.sizes.forEach((obj) => {
+      sizes.push(obj.size);
+    });
+
     this.innerHTML = `
        <div class="ProductDetail">
             <div class="ProductDetail__brandBar">
@@ -105,28 +121,9 @@ export default class ProductDetail extends HTMLElement {
                             <div class="ProductDetailGroup__border"></div>
                         </div>
                         <div class="ProductDetailOption__container">
-                            <div class="ProductDetailOption">
-                                <select class="ProductDetailOption__list">
-                                    <option class="ProductDetailOption__item" value="0">옵션 선택</option>
-                                    <option class="ProductDetailOption__item" value="1">Audi</option>
-                                    <option class="ProductDetailOption__item" value="2">BMW</option>
-                                    <option class="ProductDetailOption__item" value="3">Citroen</option>
-                                    <option class="ProductDetailOption__item" value="4">Ford</option>
-                                    <option class="ProductDetailOption__item" value="5">Honda</option>
-                                    <option class="ProductDetailOption__item" value="6">Jaguar</option>
-                                </select>
-                            </div>
-                              <div class="ProductDetailOption">
-                                <select class="ProductDetailOption__list">
-                                    <option class="ProductDetailOption__item" value="0">옵션 선택</option>
-                                    <option class="ProductDetailOption__item" value="1">Audi</option>
-                                    <option class="ProductDetailOption__item" value="2">BMW</option>
-                                    <option class="ProductDetailOption__item" value="3">Citroen</option>
-                                    <option class="ProductDetailOption__item" value="4">Ford</option>
-                                    <option class="ProductDetailOption__item" value="5">Honda</option>
-                                    <option class="ProductDetailOption__item" value="6">Jaguar</option>
-                                </select>
-                            </div>
+                           ${this.createOptionBox('색상', colors)}
+                           ${this.createOptionBox('사이즈', sizes)}
+                              
                             <div class="ProductDetailOption__price">
                                 <p>총 상품 금액</p>
                                 <p>${product.price}원</p>
@@ -207,6 +204,25 @@ export default class ProductDetail extends HTMLElement {
     const percentage = 10;
     const point = parseInt(price * percentage / 100); ;
     return this.numberWithCommas(point);
+  }
+  createOption(option) {
+    return `<option class="ProductDetailOption__item" value="${option}">${option}</option>`;
+  }
+  createOptionBox(title, options) {
+    let optionPart = '';
+    options.forEach((option) => {
+      optionPart += this.createOption(option);
+    });
+
+    const optionBox = `<div class="ProductDetailOption">
+                <select class="ProductDetailOption__list">
+        <option class="ProductDetailOption__item" value="">${title}</option>        
+               ${optionPart}
+                </select>
+            </div>`;
+
+    console.log(optionBox);
+    return optionBox;
   }
 }
 
