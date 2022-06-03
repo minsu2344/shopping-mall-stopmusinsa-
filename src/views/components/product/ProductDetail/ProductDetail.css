@@ -17,13 +17,14 @@
     font-size: 14px;
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
 }
 
 /* Container */
 .ProductDetail__container {
-    width: 90%;
-    max-width: 1020px;
-    margin: 48px 0;
+    max-width: 1200px;
+    margin: 40px 0;
+    width: 100%;
 }
 
 /* Header */
@@ -32,6 +33,11 @@
     text-decoration: underline;
     cursor: pointer;
     font-size: 14px;
+}
+.ProductDetailHeader__breadcrumbArrow {
+    display: inline-block;
+    margin: 0 4px;
+    color: #b2b2b2;
 }
 
 .ProductDetailHeader__title {
@@ -54,6 +60,7 @@
 
 /* TopContainer */
 .ProductDetail__images {
+    flex: 3;
 }
 
 .ProductDetailImages__imageContainer {
@@ -67,7 +74,8 @@
 
 .ProductDetail__content {
     flex: 2;
-    padding: 0 32px;
+    padding-left: 32px;
+    max-width: 540px;
 }
 
 /* ProductDetailGroup */
@@ -250,6 +258,9 @@
         margin-top: 0;
         width: 100%;
     }
+    .ProductDetail__brandBar {
+        display: block;
+    }
     /* topContainer */
     .ProductDetail__topContainer {
         order: 1;
@@ -262,6 +273,13 @@
     }
     .ProductDetail__content {
         display: none;
+    }
+    .ProductDetailHeader__breadcrumbArrow {
+        display: inline-block;
+        margin: 0 2px;
+        position: relative;
+        top: 2px;
+        color: #b2b2b2;
     }
     /* header */
 
@@ -279,6 +297,7 @@
     .ProductDetailHeader__breadcrumb a {
         font-size: 12px;
     }
+
     .ProductDetailHeader__brand {
         margin-top: 16px;
         color: #4478ff;
