@@ -1,4 +1,4 @@
-import * as Api from '/api.js';
+import * as Api from '../../js/api.js';
 
 const username = document.querySelector('#name');
 const curPassword = document.querySelector('#password');
@@ -35,7 +35,9 @@ async function handleFormSubmit(e) {
       },
     };
 
-    await Api.patch('localhost:5000/api/user', '', data);
+    await Api.patch('/api/user', '', data);
+    alert('정보가 변경되었습니다!');
+    location.href = '/';
   }
   catch(err) {
     console.error(err.stack);
@@ -46,7 +48,6 @@ async function handleFormSubmit(e) {
 // 기존 회원 정보 넣기
 async function paintUserInfo() {
   const user = await Api.get('/api/user');
-  console.log(user);
 
   username.value = user.fullName;
   email.value = user.email;
@@ -61,21 +62,17 @@ async function handleDeleteBtnClick() {
 
   try {
     if(result) {
-      await Api.del('/api/user/', userId);
+      await Api.delete('/api/user/');
 
+      sessionStorage.removeItem('token');
       alert('이용해주셔서 감사합니다.');
-      location.href('/');
+      location.replace('/');
     }
   }
   catch(err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
-}
-
-// 유저 정보 api에서 가져오기
-async function getUserInfo() {
-  const user = await Api.get('/api/user/userlist', )
 }
 
 // 폼 제출 이벤트
