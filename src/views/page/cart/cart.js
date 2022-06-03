@@ -247,7 +247,7 @@ function handleCheck(checkbox) {
 /* main */
 
 // 화면에 localStorage 띄우기
-saveProducts(DEFAUTL_PRODUCTS);
+// saveProducts(DEFAUTL_PRODUCTS);
 getProducts();
 
 
