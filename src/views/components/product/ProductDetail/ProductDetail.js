@@ -7,14 +7,13 @@ export default class ProductDetail extends HTMLElement {
     // colors
     const colors = [];
     product.colors.forEach((obj) => {
-      colors.push(obj.color);
+      colors.push(obj.color.colorName);
     });
     // sizes
     const sizes = [];
     product.sizes.forEach((obj) => {
-      sizes.push(obj.size);
+      sizes.push(obj.size.sizeName);
     });
-
     this.innerHTML = `
        <div class="ProductDetail">
             <div class="ProductDetail__brandBar">
@@ -25,7 +24,7 @@ export default class ProductDetail extends HTMLElement {
                     <div class="ProductDetailHeader__breadcrumb">
                         <a>${product.categories ? product.categories.item : 'no category'}</a>
                         <span class="ProductDetailHeader__breadcrumbArrow"> &gt </span>
-                        <a>${product.categories ? product.categories.subitem : 'no category'}</a>
+                        <a>${product.categories ? product.categories.subItem : 'no category'}</a>
                     </div>
                     <p class="ProductDetailHeader__brand">${product.brand}</p>
                     <h2 class="ProductDetailHeader__title">${product.name}</h2>
@@ -105,7 +104,7 @@ export default class ProductDetail extends HTMLElement {
                               
                             <div class="ProductDetailOption__price">
                                 <p>총 상품 금액</p>
-                                <p>${product.price}원</p>
+                                <p>${this.numberWithCommas(product.price)}원</p>
                             </div>
                         </div>
                         <div class="ProductDetailPayment">
@@ -170,8 +169,6 @@ export default class ProductDetail extends HTMLElement {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     this.product = await Api.get(`/api/product/${id}`);
-    console.log(id);
-    console.log(this.product);
     return this.product;
   }
   numberWithCommas(x) {
@@ -189,6 +186,7 @@ export default class ProductDetail extends HTMLElement {
   }
   createOptionBox(title, options) {
     let optionPart = '';
+    console.log(options);
     options.forEach((option) => {
       optionPart += this.createOption(option);
     });
@@ -200,7 +198,6 @@ export default class ProductDetail extends HTMLElement {
                 </select>
             </div>`;
 
-    console.log(optionBox);
     return optionBox;
   }
 }
