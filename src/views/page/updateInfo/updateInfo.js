@@ -42,7 +42,7 @@ async function handleFormSubmit(e) {
 
 // 기존 회원 정보 넣기
 async function paintUserInfo() {
-  const user = Api.get();
+  const user = await Api.get();
 }
 
 // 회원탈퇴 버튼 클릭 함수
@@ -51,7 +51,10 @@ async function handleDeleteBtnClick() {
 
   try {
     if(result) {
-      await Api.del
+      await Api.del('/api/user/', userId);
+
+      alert('이용해주셔서 감사합니다.');
+      location.href('/');
     }
   }
   catch(err) {
@@ -62,7 +65,7 @@ async function handleDeleteBtnClick() {
 
 // 유저 정보 api에서 가져오기
 async function getUserInfo() {
-  const user = await Api.get('localhost5000:/api/user/userlist', )
+  const user = await Api.get('/api/user/userlist', )
 }
 
 // 폼 제출 이벤트
