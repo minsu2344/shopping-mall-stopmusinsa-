@@ -32,6 +32,7 @@
 .ProductCard__image {
     border-radius: 8px;
     width: 100%;
+    min-height: 200px;
 }
 
 .ProductCard__body {

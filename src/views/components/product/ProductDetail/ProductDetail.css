@@ -60,6 +60,7 @@
 
 /* TopContainer */
 .ProductDetail__images {
+    flex: 3;
 }
 
 .ProductDetailImages__imageContainer {

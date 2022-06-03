@@ -17,7 +17,7 @@ export default class ProductCard extends HTMLElement {
             <div class="ProductCard__body">
                 <h3 class="ProductCard__brand">${product.brand}</h3>
                 <p class="ProductCard__title">${product.name}</p>
-                <p class="ProductCard__price">${product.price}원</p>
+                <p class="ProductCard__price">${this.numberWithCommas(product.price)}원</p>
             </div>
         </div>
       </a>
@@ -34,6 +34,9 @@ export default class ProductCard extends HTMLElement {
   }
   set product(product) {
     this._product = product;
+  }
+  numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 }
 window.customElements.define('product-card', ProductCard);
