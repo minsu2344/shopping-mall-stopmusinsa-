@@ -1,6 +1,6 @@
 import * as Api from '../../../js/api.js';
 export default class ProductList extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
     const title = this.getAttribute('title') ? ' - ' + this.getAttribute('title') : '';
     // html 추가
     this.innerHTML = `
@@ -18,20 +18,32 @@ export default class ProductList extends HTMLElement {
     linkElem.setAttribute('href', '/src/views/components/product/ProductList/ProductList.css');
     this.appendChild(linkElem);
 
-    // Product Card 동적으로 추가
-    this.addProductCards();
 
-    // Infinite Scroll
-    this.addInfiniteScroll();
+    // fetch data
+    // Product Card 동적으로 추가
+    const numberOfProducts = await this.addProductCards();
+    // 충분한 제품수가 있을때만 무한스크롤
+    console.log(numberOfProducts);
+    if (numberOfProducts > 20) {
+      this.addInfiniteScroll();
+    }
   }
   async addProductCards(n) {
     const data = await Api.get('/api/product');
     console.log(data);
-    const products = data;
+
+    // test code
     // const products = this.createSampleProducts(20);
+    let products = [];
+    for (let i = 0; i <= 10; i++) {
+      products = products.concat(data);
+    };
+
+
     products.forEach((product) => {
       this.addProductCard(product);
     });
+    return products.length;
   }
   addProductCard(product) {
     const productList = document.querySelector('.ProductList__products');
@@ -97,7 +109,11 @@ export default class ProductList extends HTMLElement {
             // 리스트에서 Spinner, Skeleton items  삭제
             this.removeLoadingElements();
             // API 호출 - 새 컨텐츠를 붙임
-            this.addProductCards(20);
+            const numberOfProducts = this.addProductCards(20);
+            if (numberOfProducts < 20) {
+              const footer = document.querySelector('.Footer__contact');
+              observer.unobserve(footer);
+            }
           }, 1000);
         }
       });
