@@ -82,3 +82,51 @@ form.addEventListener('submit', handleFormSubmit);
 deleteBtn.addEventListener('click', handleDeleteBtnClick);
 
 paintUserInfo();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 주문 내역
+const orderBox = document.querySelector('.history__products');
+const cancleBtn = document.querySelectorAll('.order__status');
+
+async function getData() {
+  const orders = await Api.get('/api/order/member/orders');
+  const products = await Api.get('/api/product');
+  console.log(orders, products);
+  // orders.forEach(order => {
+  //   const img = 
+  // })
+}
+
+function paintData(img, name, date, price) {
+  return `
+    <div class="history__product">
+      <div class="product__title">
+          <img src="${img}" alt="product">
+          <p class="product__name">${name}</p>
+      </div>
+      <div class="history__date">
+          <p class="order__date">${date}</p>
+      </div>
+      <div class="history__price">
+          <p class="order__price">${price}</p>
+      </div>
+      <div class="history__status">
+          <input type="button" class="order__status" value="주문취소">
+      </div>
+    </div>
+  `
+}
+
+getData();
