@@ -11,7 +11,7 @@ const PRODUCTS_KEY = 'products';
 let sum = 0;
 
 
-let DEFAUTL_PRODUCTS = [{_id: 'djf20', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}, {_id: '12fd1', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1}];
+let DEFAUTL_PRODUCTS = [{_id: 'djf20', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1, checked: true}, {_id: '12fd1', image: '../../assets/favicon.png', name: '나이키', option: 'L', price: '19000', quantity: 1, checked: true}];
 
 
 // 로컬스토리지 저장
@@ -103,7 +103,7 @@ function paintProductBox(index, image, name, option, price, quantity, result) {
 
 // 상품 갯수 innerText 정리 함수
 function setProductNum() {
-  const numberOfProducts = JSON.parse(localStorage.products).length;
+  const numberOfProducts = JSON.parse(localStorage.getItem('products')).length;
   totalProductsNum.innerText = numberOfProducts;
   totalInProducts.innerText = `전체 ${numberOfProducts}개`;
 }
@@ -128,6 +128,13 @@ function handleDeleteAllBtnClick() {
 function handleCheckAllClick(e) {
   const checkBoxes = document.querySelectorAll('.product-check');
   Array.from(checkBoxes).forEach((x) => x.checked = e.target.checked);
+
+  const products = getProductsData();
+  checkAllBox.checked === true ?
+  products.forEach(product => product.checked = true) :
+  products.forEach(product => product.checked = false);
+
+  saveProducts(products);
 }
 
 
@@ -145,6 +152,16 @@ function hadleDeleteBtnClick() {
       }
     });
   }
+}
+
+
+// oerderBtn 클릭 함수
+function handleOrderBtnClick() {
+  const products = getProductsData();
+  const filtered = products.filter(product => {
+    return product.checked === true;
+  });
+  location.href = '/pay';
 }
 
 
@@ -198,8 +215,10 @@ function handleCheck(checkbox) {
     checkAllBox.checked = true;
   }
 
-
   const value = checkbox.checked;
+
+  const products = getProductsData();
+  const index = Number(checkbox.parentElement.firstElementChild.innerText) - 1;
 
   const result = checkbox.parentElement.querySelector('.product-result').innerText;
   const resultPrice = result.replace(/,/g, '');
@@ -209,8 +228,12 @@ function handleCheck(checkbox) {
     checkAllBox.checked = false;
 
     sum -= Number(resultPrice);
+    products[index].checked = false;
+    saveProducts(products);
   } else {
     sum += Number(resultPrice);
+    products[index].checked = true;
+    saveProducts(products);
   }
 
   if (sum !== 0) {
@@ -224,7 +247,7 @@ function handleCheck(checkbox) {
 /* main */
 
 // 화면에 localStorage 띄우기
-// saveProducts(products);
+// saveProducts(DEFAUTL_PRODUCTS);
 getProducts();
 
 
@@ -239,7 +262,8 @@ checkAllBox.addEventListener('click', handleCheckAllClick);
 // 선택삭제 이벤트
 deleteBtn.addEventListener('click', hadleDeleteBtnClick);
 
-
+// 결제하기 버튼 이벤트
+totalPrice.addEventListener('click', handleOrderBtnClick);
 
 
 
