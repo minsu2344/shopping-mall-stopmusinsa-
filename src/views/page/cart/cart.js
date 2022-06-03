@@ -11,7 +11,8 @@ const PRODUCTS_KEY = 'products';
 let sum = 0;
 
 
-let DEFAUTL_PRODUCTS = [{_id: '629913727585ca9d9ab3cbea', image: 'http://localhost:5000/uploads/1654199154357_ser_image_logisim1.png', name: 'ser', option: 'Large', price: '23', quantity: 1, checked: true}, {_id: '6298dfa9549dddaa414663c5', image: 'http://localhost:5000/uploads/1654185897819_좋은 바_image_logisim1.png', name: '좋은 바', option: 'Large', price: '30000', quantity: 1, checked: true}];
+// 예시코드
+// let DEFAUTL_PRODUCTS = [{_id: '629913727585ca9d9ab3cbea', image: 'http://localhost:5000/uploads/1654199154357_ser_image_logisim1.png', name: 'ser', option: 'Large', price: '23', quantity: 1, checked: true}, {_id: '6298dfa9549dddaa414663c5', image: 'http://localhost:5000/uploads/1654185897819_좋은 바_image_logisim1.png', name: '좋은 바', option: 'Large', price: '30000', quantity: 1, checked: true}];
 
 
 // 로컬스토리지 저장
@@ -21,12 +22,7 @@ function saveProducts(newProducts) {
 
 function getProductsData() {
   const products = JSON.parse(localStorage.getItem(PRODUCTS_KEY));
-  if(Array.isArray(products)) {
-    return products;
-  }
-  else {
-    return DEFAUTL_PRODUCTS;
-  }
+  return products;
 }
 
 
@@ -161,6 +157,7 @@ function handleOrderBtnClick() {
   const filtered = products.filter(product => {
     return product.checked === true;
   });
+  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(filtered));
   location.replace('/pay');
 }
 
